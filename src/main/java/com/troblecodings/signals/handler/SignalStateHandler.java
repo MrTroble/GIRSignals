@@ -562,12 +562,13 @@ public final class SignalStateHandler implements INetworkSync {
                 }
                 sendToAll(info.info, properties);
                 updateListeners(info.info, properties, ChangedState.ADDED_TO_CACHE);
+                final List<SignalStateListener> tasks;
                 synchronized (TASKS_WHEN_LOAD) {
-                    final List<SignalStateListener> tasks = TASKS_WHEN_LOAD.remove(info.info);
-                    if (tasks != null) {
-                        tasks.forEach(listener -> listener.update(info.info, properties,
-                                ChangedState.ADDED_TO_CACHE));
-                    }
+                    tasks = TASKS_WHEN_LOAD.remove(info.info);
+                }
+                if (tasks != null) {
+                    tasks.forEach(listener -> listener.update(info.info, properties,
+                            ChangedState.ADDED_TO_CACHE));
                 }
             });
         });
