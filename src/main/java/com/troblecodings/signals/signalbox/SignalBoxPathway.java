@@ -156,7 +156,10 @@ public class SignalBoxPathway implements IChunkLoadable {
     public void updatePrevious() {
         if (grid == null)
             return;
-        grid.updatePrevious(this);
+        loadTileAndExecute(tile -> {
+            grid = tile.getSignalBoxGrid();
+            grid.updatePrevious(this);
+        });
     }
 
     protected SignalStateInfo lastSignalInfo = null;

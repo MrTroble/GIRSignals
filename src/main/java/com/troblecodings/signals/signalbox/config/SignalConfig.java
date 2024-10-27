@@ -141,9 +141,10 @@ public final class SignalConfig {
                             .filter(entry -> oldProperties.containsKey(entry.getKey()))
                             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
                 });
-                if (!propertiesToSet.isEmpty())
+                if (!propertiesToSet.isEmpty()) {
                     SignalStateHandler.setStates(current, propertiesToSet);
-                pathway.updatePrevious();
+                    pathway.updatePrevious();
+                }
             });
         }
     }
