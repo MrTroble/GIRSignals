@@ -43,7 +43,6 @@ import net.minecraft.world.World;
 public class SignalBoxPathway implements IChunkLoadable {
 
     protected final PathwayData data;
-    protected final SignalConfig config;
 
     protected boolean isBlocked;
     protected boolean isAutoPathway = false;
@@ -58,7 +57,6 @@ public class SignalBoxPathway implements IChunkLoadable {
     }
 
     public SignalBoxPathway(final PathwayData data) {
-        this.config = new SignalConfig(this);
         this.data = data;
         this.originalFirstPoint = new Point(data.getFirstPoint());
         updatePathwayToAutomatic();
@@ -205,7 +203,7 @@ public class SignalBoxPathway implements IChunkLoadable {
             if (first == null)
                 return;
             final SignalStateInfo firstInfo = new SignalStateInfo(world, startSignal.pos, first);
-            config.change(new ConfigInfo(firstInfo, lastSignal, data));
+            SignalConfig.change(new ConfigInfo(firstInfo, lastSignal, data));
             updatePreSignals();
         }
         final SignalBoxPathway next = getNextPathway();
@@ -225,9 +223,9 @@ public class SignalBoxPathway implements IChunkLoadable {
                     new SignalStateInfo(world, position.pos, current), lastSignal, data,
                     position.isRepeater);
             if (position.guiMode.equals(EnumGuiMode.HP)) {
-                config.loadDisable(info);
+                SignalConfig.loadDisable(info);
             } else {
-                config.change(info);
+                SignalConfig.change(info);
             }
         });
         updateSignalStates();
@@ -247,7 +245,7 @@ public class SignalBoxPathway implements IChunkLoadable {
             final Signal current = SignalBoxHandler.getSignal(identifier, posIdent.pos);
             if (current == null)
                 return;
-            config.change(
+            SignalConfig.change(
                     new ConfigInfo(new SignalStateInfo(tile.getWorld(), posIdent.pos, current),
                             firstInfo, data, posIdent.isRepeater));
         });
