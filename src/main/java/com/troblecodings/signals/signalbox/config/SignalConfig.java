@@ -26,8 +26,8 @@ public final class SignalConfig {
 
     private static final LoadHolder<Class<SignalConfig>> LOAD_HOLDER = new LoadHolder<>(
             SignalConfig.class);
+    private static final ExecutorService SERVICE = Executors.newCachedThreadPool();
 
-    private final ExecutorService service = Executors.newCachedThreadPool();
     private final SignalBoxPathway pathway;
 
     public SignalConfig(final SignalBoxPathway pathway) {
@@ -53,7 +53,7 @@ public final class SignalConfig {
             final List<ConfigProperty> shuntingValues = OneSignalNonPredicateConfigParser.SHUNTINGCONFIGS
                     .get(currentSignal);
             if (shuntingValues != null && info.currentinfo.isValid()) {
-                service.execute(() -> loadWithoutPredicate(shuntingValues, info.currentinfo));
+                loadWithoutPredicate(shuntingValues, info.currentinfo);
             }
         }
     }
@@ -100,16 +100,14 @@ public final class SignalConfig {
     }
 
     private void changeIfPresent(final List<ConfigProperty> values, final ConfigInfo info) {
-        service.execute(() -> {
-            loadSignalAndRunTask(info.currentinfo, (stateInfo, oldProperties, _u) -> {
-                if (info.nextinfo != null) {
-                    loadSignalAndRunTask(info.nextinfo, (nextInfo, nextProperties, _u2) -> {
-                        changeSignals(values, info, oldProperties, nextProperties);
-                    });
-                } else {
-                    changeSignals(values, info, oldProperties, null);
-                }
-            });
+        loadSignalAndRunTask(info.currentinfo, (stateInfo, oldProperties, _u) -> {
+            if (info.nextinfo != null) {
+                loadSignalAndRunTask(info.nextinfo, (nextInfo, nextProperties, _u2) -> {
+                    changeSignals(values, info, oldProperties, nextProperties);
+                });
+            } else {
+                changeSignals(values, info, oldProperties, null);
+            }
         });
     }
 
@@ -155,12 +153,14 @@ public final class SignalConfig {
 
     private static void loadSignalAndRunTask(final SignalStateInfo info,
             final SignalStateListener task) {
-        final boolean isSignalLoaded = SignalStateHandler.isSignalLoaded(info);
-        if (!isSignalLoaded) {
-            SignalStateHandler.loadSignal(new SignalStateLoadHoler(info, LOAD_HOLDER));
-            task.andThen((_u1, _u2, _u3) -> SignalStateHandler
-                    .unloadSignal(new SignalStateLoadHoler(info, LOAD_HOLDER)));
-        }
-        SignalStateHandler.runTaskWhenSignalLoaded(info, task);
+        SERVICE.execute(() -> {
+            final boolean isSignalLoaded = SignalStateHandler.isSignalLoaded(info);
+            if (!isSignalLoaded) {
+                SignalStateHandler.loadSignal(new SignalStateLoadHoler(info, LOAD_HOLDER));
+                task.andThen((_u1, _u2, _u3) -> SignalStateHandler
+                        .unloadSignal(new SignalStateLoadHoler(info, LOAD_HOLDER)));
+            }
+            SignalStateHandler.runTaskWhenSignalLoaded(info, task);
+        });
     }
 }
