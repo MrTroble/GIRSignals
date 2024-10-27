@@ -609,6 +609,8 @@ public class SignalBoxPathway implements IChunkLoadable {
         buffer.putInt(trainNumberDisplays.size());
         trainNumberDisplays.forEach(ident -> {
             final SignalBoxNode node = grid.getNode(ident.point);
+            if (node == null)
+                return;
             node.getPoint().writeNetwork(buffer);
             node.writeNetwork(buffer);
         });
