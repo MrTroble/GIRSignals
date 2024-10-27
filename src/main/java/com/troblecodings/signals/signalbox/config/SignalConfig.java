@@ -3,8 +3,6 @@ package com.troblecodings.signals.signalbox.config;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Maps;
@@ -26,7 +24,6 @@ public final class SignalConfig {
 
     private static final LoadHolder<Class<SignalConfig>> LOAD_HOLDER = new LoadHolder<>(
             SignalConfig.class);
-    private static final ExecutorService SERVICE = Executors.newCachedThreadPool();
 
     private final SignalBoxPathway pathway;
 
@@ -157,14 +154,12 @@ public final class SignalConfig {
 
     private static void loadSignalAndRunTask(final SignalStateInfo info,
             final SignalStateListener task) {
-        SERVICE.execute(() -> {
-            final boolean isSignalLoaded = SignalStateHandler.isSignalLoaded(info);
-            if (!isSignalLoaded) {
-                SignalStateHandler.loadSignal(new SignalStateLoadHoler(info, LOAD_HOLDER));
-                task.andThen((_u1, _u2, _u3) -> SignalStateHandler
-                        .unloadSignal(new SignalStateLoadHoler(info, LOAD_HOLDER)));
-            }
-            SignalStateHandler.runTaskWhenSignalLoaded(info, task);
-        });
+        final boolean isSignalLoaded = SignalStateHandler.isSignalLoaded(info);
+        if (!isSignalLoaded) {
+            SignalStateHandler.loadSignal(new SignalStateLoadHoler(info, LOAD_HOLDER));
+            task.andThen((_u1, _u2, _u3) -> SignalStateHandler
+                    .unloadSignal(new SignalStateLoadHoler(info, LOAD_HOLDER)));
+        }
+        SignalStateHandler.runTaskWhenSignalLoaded(info, task);
     }
 }
