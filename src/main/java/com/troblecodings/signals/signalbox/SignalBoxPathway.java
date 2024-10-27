@@ -237,10 +237,6 @@ public class SignalBoxPathway implements IChunkLoadable {
         final MainSignalIdentifier startSignal = data.getStartSignal();
         if (startSignal == null)
             return;
-        final SignalBoxPathway next = getNextPathway();
-        if (next != null && (next.isEmptyOrBroken() || next.isBlocked)) {
-            return;
-        }
         final StateInfo identifier = new StateInfo(tile.getWorld(), tile.getPos());
         final Signal first = SignalBoxHandler.getSignal(identifier, startSignal.pos);
         if (first == null)
@@ -445,11 +441,14 @@ public class SignalBoxPathway implements IChunkLoadable {
             resetAllTrainNumbers();
             sendTrainNumberUpdates();
             resetProtectionWay();
-            final SignalBoxPathway next = getNextPathway();
-            if (next != null) {
-                next.updatePreSignals();
-                next.updateSignalStates();
-            }
+        }
+    }
+
+    public void postReset() {
+        final SignalBoxPathway next = getNextPathway();
+        if (next != null) {
+            next.updatePreSignals();
+            next.updateSignalStates();
         }
     }
 

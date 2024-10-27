@@ -131,6 +131,7 @@ public class SignalBoxGrid implements INetworkSavable {
         updatePrevious(pathway);
         this.startsToPath.remove(pathway.getFirstPoint());
         this.endsToPath.remove(pathway.getLastPoint());
+        pathway.postReset();
     }
 
     protected void updateToNet(final SignalBoxPathway pathway) {
