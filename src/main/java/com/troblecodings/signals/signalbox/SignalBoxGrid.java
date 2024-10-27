@@ -190,6 +190,7 @@ public class SignalBoxGrid implements INetworkSavable {
                 break;
             }
             previousPath.setSignals();
+            count++;
         }
         if (count == 0) {
             if (OpenSignalsMain.isDebug()) {
