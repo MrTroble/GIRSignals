@@ -87,11 +87,6 @@ public class SignalBoxGrid implements INetworkSavable {
         startsToPath.put(pathway.getFirstPoint(), pathway);
         endsToPath.put(pathway.getLastPoint(), pathway);
         updatePrevious(pathway);
-        System.out.println("Updateing Previous for " + pathway + "!");
-        System.out.println("Call: ");
-        for (final StackTraceElement el : Thread.currentThread().getStackTrace()) {
-            System.out.println("         " + el);
-        }
     }
 
     public List<MainSignalIdentifier> getGreenSignals() {
@@ -190,6 +185,12 @@ public class SignalBoxGrid implements INetworkSavable {
         SignalBoxPathway previousPath = endsToPath.get(pathway.getFirstPoint());
         if (previousPath != null) {
             previousPath.setSignals();
+        }
+        System.out.println("Updateing Previous for " + pathway + "!");
+        System.out.println("Previous: " + previousPath);
+        System.out.println("Call: ");
+        for (final StackTraceElement el : Thread.currentThread().getStackTrace()) {
+            System.out.println("         " + el);
         }
     }
 
