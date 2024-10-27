@@ -149,7 +149,8 @@ public final class SignalConfig {
     }
 
     private void updatePreviousPathway(final SignalStateInfo info) {
-        info.world.getMinecraftServer().addScheduledTask(() -> pathway.updatePrevious());
+        // info.world.getMinecraftServer().addScheduledTask(() ->
+        // pathway.updatePrevious());
     }
 
     private static void loadSignalAndRunTask(final SignalStateInfo info,
