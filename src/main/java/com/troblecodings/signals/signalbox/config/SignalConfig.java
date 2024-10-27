@@ -129,7 +129,7 @@ public final class SignalConfig {
         });
         if (!propertiesToSet.isEmpty()) {
             SignalStateHandler.setStates(info.currentinfo, propertiesToSet);
-            pathway.updatePrevious();
+            updatePreviousPathway(info.currentinfo);
         }
     }
 
@@ -145,10 +145,14 @@ public final class SignalConfig {
                 });
                 if (!propertiesToSet.isEmpty()) {
                     SignalStateHandler.setStates(current, propertiesToSet);
-                    pathway.updatePrevious();
+                    updatePreviousPathway(current);
                 }
             });
         }
+    }
+
+    private void updatePreviousPathway(final SignalStateInfo info) {
+        info.world.getMinecraftServer().addScheduledTask(() -> pathway.updatePrevious());
     }
 
     private static void loadSignalAndRunTask(final SignalStateInfo info,
