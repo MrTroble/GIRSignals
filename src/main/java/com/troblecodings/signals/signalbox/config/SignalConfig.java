@@ -3,6 +3,8 @@ package com.troblecodings.signals.signalbox.config;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Maps;
@@ -25,6 +27,7 @@ public final class SignalConfig {
     private static final LoadHolder<Class<SignalConfig>> LOAD_HOLDER = new LoadHolder<>(
             SignalConfig.class);
 
+    private final ExecutorService service = Executors.newCachedThreadPool();
     private final SignalBoxPathway pathway;
 
     public SignalConfig(final SignalBoxPathway pathway) {
@@ -50,7 +53,7 @@ public final class SignalConfig {
             final List<ConfigProperty> shuntingValues = OneSignalNonPredicateConfigParser.SHUNTINGCONFIGS
                     .get(currentSignal);
             if (shuntingValues != null && info.currentinfo.isValid()) {
-                loadWithoutPredicate(shuntingValues, info.currentinfo);
+                service.execute(() -> loadWithoutPredicate(shuntingValues, info.currentinfo));
             }
         }
     }
@@ -97,16 +100,17 @@ public final class SignalConfig {
     }
 
     private void changeIfPresent(final List<ConfigProperty> values, final ConfigInfo info) {
-        loadSignalAndRunTask(info.currentinfo, (stateInfo, oldProperties, _u) -> {
-            if (info.nextinfo != null) {
-                loadSignalAndRunTask(info.nextinfo, (nextInfo, nextProperties, _u2) -> {
-                    changeSignals(values, info, oldProperties, nextProperties);
-                });
-            } else {
-                changeSignals(values, info, oldProperties, null);
-            }
+        service.execute(() -> {
+            loadSignalAndRunTask(info.currentinfo, (stateInfo, oldProperties, _u) -> {
+                if (info.nextinfo != null) {
+                    loadSignalAndRunTask(info.nextinfo, (nextInfo, nextProperties, _u2) -> {
+                        changeSignals(values, info, oldProperties, nextProperties);
+                    });
+                } else {
+                    changeSignals(values, info, oldProperties, null);
+                }
+            });
         });
-
     }
 
     private void changeSignals(final List<ConfigProperty> values, final ConfigInfo info,
