@@ -187,12 +187,6 @@ public class SignalBoxGrid implements INetworkSavable {
         if (previousPath != null) {
             previousPath.setSignals();
         }
-        System.out.println("Updateing Previous for " + pathway + "!");
-        System.out.println("Previous: " + previousPath);
-        System.out.println("Call: ");
-        for (final StackTraceElement el : Thread.currentThread().getStackTrace()) {
-            System.out.println("         " + el);
-        }
     }
 
     public void resetAllPathways() {
