@@ -151,9 +151,7 @@ public final class NameHandler implements INetworkSync {
     }
 
     public static boolean isNameLoaded(final StateInfo info) {
-        synchronized (ALL_NAMES) {
-            return ALL_NAMES.containsKey(info);
-        }
+        return ALL_NAMES.containsKey(info);
     }
 
     public static void runTaskWhenNameLoaded(final StateInfo info,
@@ -161,9 +159,11 @@ public final class NameHandler implements INetworkSync {
         if (!info.isValid() || info.isWorldNullOrClientSide())
             return;
         if (isNameLoaded(info)) {
+            final String name;
             synchronized (ALL_NAMES) {
-                listener.update(info, ALL_NAMES.get(info), ChangedState.UPDATED);
+                name = ALL_NAMES.get(info);
             }
+            listener.update(info, name, ChangedState.UPDATED);
         } else {
             synchronized (TASKS_WHEN_LOAD) {
                 final List<NameStateListener> list = TASKS_WHEN_LOAD.computeIfAbsent(info,
@@ -373,12 +373,13 @@ public final class NameHandler implements INetworkSync {
                     ALL_NAMES.put(info.info, name);
                 }
                 sendToAll(info.info, name);
+                final List<NameStateListener> tasks;
                 synchronized (TASKS_WHEN_LOAD) {
-                    final List<NameStateListener> tasks = TASKS_WHEN_LOAD.remove(info.info);
-                    if (tasks != null) {
-                        tasks.forEach(listener -> listener.update(info.info, name,
-                                ChangedState.ADDED_TO_CACHE));
-                    }
+                    tasks = TASKS_WHEN_LOAD.remove(info.info);
+                }
+                if (tasks != null) {
+                    tasks.forEach(listener -> listener.update(info.info, name,
+                            ChangedState.ADDED_TO_CACHE));
                 }
             });
         });

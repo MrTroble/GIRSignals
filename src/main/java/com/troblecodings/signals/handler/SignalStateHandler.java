@@ -129,9 +129,11 @@ public final class SignalStateHandler implements INetworkSync {
         if (!info.isValid() || info.isWorldNullOrClientSide())
             return;
         if (isSignalLoaded(info)) {
+            final Map<SEProperty, String> properties;
             synchronized (CURRENTLY_LOADED_STATES) {
-                listener.update(info, CURRENTLY_LOADED_STATES.get(info), ChangedState.UPDATED);
+                properties = CURRENTLY_LOADED_STATES.get(info);
             }
+            listener.update(info, properties, ChangedState.UPDATED);
         } else {
             synchronized (TASKS_WHEN_LOAD) {
                 final List<SignalStateListener> list = TASKS_WHEN_LOAD.computeIfAbsent(info,
@@ -575,12 +577,13 @@ public final class SignalStateHandler implements INetworkSync {
                 }
                 sendTo(info.info, properties, player);
                 updateListeners(info.info, properties, ChangedState.ADDED_TO_CACHE);
+                final List<SignalStateListener> tasks;
                 synchronized (TASKS_WHEN_LOAD) {
-                    final List<SignalStateListener> tasks = TASKS_WHEN_LOAD.remove(info.info);
-                    if (tasks != null) {
-                        tasks.forEach(listener -> listener.update(info.info, properties,
-                                ChangedState.ADDED_TO_CACHE));
-                    }
+                    tasks = TASKS_WHEN_LOAD.remove(info.info);
+                }
+                if (tasks != null) {
+                    tasks.forEach(listener -> listener.update(info.info, properties,
+                            ChangedState.ADDED_TO_CACHE));
                 }
             });
         });
