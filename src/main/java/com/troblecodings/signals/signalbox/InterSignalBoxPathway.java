@@ -178,10 +178,12 @@ public class InterSignalBoxPathway extends SignalBoxPathway {
         final boolean result = super.tryBlock(position);
         if (result && pathwayToBlock != null) {
             pathwayToBlock.loadTileAndExecute(otherTile -> {
-                pathwayToBlock = (InterSignalBoxPathway) otherTile.getSignalBoxGrid()
+                final SignalBoxGrid otherGrid = otherTile.getSignalBoxGrid();
+                pathwayToBlock = (InterSignalBoxPathway) otherGrid
                         .getPathwayByLastPoint(pathwayToBlock.getLastPoint());
                 pathwayToBlock.setPathStatus(EnumPathUsage.BLOCKED);
                 pathwayToBlock.updateTrainNumber(trainNumber);
+                otherGrid.updateToNet(pathwayToBlock);
             });
         }
         return result;

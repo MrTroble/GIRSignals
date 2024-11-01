@@ -18,20 +18,16 @@ import com.troblecodings.signals.enums.PathType;
 import com.troblecodings.signals.handler.SignalStateHandler;
 import com.troblecodings.signals.handler.SignalStateInfo;
 import com.troblecodings.signals.properties.PredicatedPropertyBase.ConfigProperty;
-import com.troblecodings.signals.signalbox.SignalBoxPathway;
 
 public final class SignalConfig {
 
     private static final LoadHolder<Class<SignalConfig>> LOAD_HOLDER = new LoadHolder<>(
             SignalConfig.class);
 
-    private final SignalBoxPathway pathway;
-
-    public SignalConfig(final SignalBoxPathway pathway) {
-        this.pathway = pathway;
+    private SignalConfig() {
     }
 
-    public void change(final ConfigInfo info) {
+    public static void change(final ConfigInfo info) {
         final Signal currentSignal = info.currentinfo.signal;
         if (info.type.equals(PathType.NORMAL)) {
             if (info.nextinfo != null && info.nextinfo.isValid()) {
@@ -55,7 +51,7 @@ public final class SignalConfig {
         }
     }
 
-    private void loadDefault(final ConfigInfo info) {
+    private static void loadDefault(final ConfigInfo info) {
         if (!info.currentinfo.isValid())
             return;
         final List<ConfigProperty> defaultValues = OneSignalPredicateConfigParser.DEFAULTCONFIGS
@@ -88,7 +84,7 @@ public final class SignalConfig {
         });
     }
 
-    public void loadDisable(final ConfigInfo info) {
+    public static void loadDisable(final ConfigInfo info) {
         final List<ConfigProperty> disableValues = OneSignalPredicateConfigParser.DISABLECONFIGS
                 .get(info.currentinfo.signal);
         if (disableValues != null) {
@@ -96,7 +92,7 @@ public final class SignalConfig {
         }
     }
 
-    private void changeIfPresent(final List<ConfigProperty> values, final ConfigInfo info) {
+    private static void changeIfPresent(final List<ConfigProperty> values, final ConfigInfo info) {
         loadSignalAndRunTask(info.currentinfo, (stateInfo, oldProperties, _u) -> {
             if (info.nextinfo != null) {
                 loadSignalAndRunTask(info.nextinfo, (nextInfo, nextProperties, _u2) -> {
@@ -109,7 +105,7 @@ public final class SignalConfig {
 
     }
 
-    private void changeSignals(final List<ConfigProperty> values, final ConfigInfo info,
+    private static void changeSignals(final List<ConfigProperty> values, final ConfigInfo info,
             final Map<SEProperty, String> oldProperties,
             final Map<SEProperty, String> nextProperties) {
         final Map<Class<?>, Object> object = new HashMap<>();
@@ -127,11 +123,10 @@ public final class SignalConfig {
         });
         if (!propertiesToSet.isEmpty()) {
             SignalStateHandler.setStates(info.currentinfo, propertiesToSet);
-            pathway.updatePrevious();
         }
     }
 
-    private void loadWithoutPredicate(final List<ConfigProperty> values,
+    private static void loadWithoutPredicate(final List<ConfigProperty> values,
             final SignalStateInfo current) {
         if (values != null) {
             loadSignalAndRunTask(current, (info, oldProperties, _u) -> {
@@ -143,7 +138,6 @@ public final class SignalConfig {
                 });
                 if (!propertiesToSet.isEmpty())
                     SignalStateHandler.setStates(current, propertiesToSet);
-                pathway.updatePrevious();
             });
         }
     }
