@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.18.2 - 3.6.3]
+* fix: Element rotation in signalbox
+* fix: threads blocking each other
+* ref: better system for pathway updateing and signal setting
+* fix: wrong lamp in wn signal
+
 ## [1.18.2 - 3.6.2]
 * feat: added train length signs
 * feat: added trainnumber element
