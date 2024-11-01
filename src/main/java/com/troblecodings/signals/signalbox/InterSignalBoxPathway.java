@@ -211,6 +211,7 @@ public class InterSignalBoxPathway extends SignalBoxPathway {
                 pathwayToBlock = (InterSignalBoxPathway) pw;
                 pathwayToBlock.setPathStatus(EnumPathUsage.BLOCKED);
                 pathwayToBlock.updateTrainNumber(trainNumber);
+                otherGrid.updateToNet(pathwayToBlock);
             });
         }
         return result;

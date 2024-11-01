@@ -30,7 +30,7 @@ jobs:
     if: endswith(github.ref_name, 'master') && github.ref_protected && github.ref_type == 'branch'
     runs-on: ubuntu-latest
     env:
-      APPVEYOR_BUILD_VERSION: '3.6.2'
+      APPVEYOR_BUILD_VERSION: '3.6.3'
       CURSETOKEN: ${{ secrets.CURSETOKEN }}
     steps:
     - uses: actions/checkout@v3

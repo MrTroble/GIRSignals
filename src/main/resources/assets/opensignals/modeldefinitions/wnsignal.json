@@ -83,7 +83,8 @@
                 {
                     "blockstate":"hasandis(WNTYPE) && with(WNCROSS.BLINK)",
                     "retexture":{
-                        "lamp_1": "lamp_white_blink"
+                        "lamp_1_north": "lamp_white_blink",
+                        "lamp_1_south": "lamp_white_blink"
                     }
                 }
             ]
