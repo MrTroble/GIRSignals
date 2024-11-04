@@ -88,7 +88,7 @@
                 }
             ]
         },
-        "semaphore_signals/sema_distant_plate_on": {
+        "semaphore_signals/sema_distant_plate": {
             "translationX": 0,
             "translationY": 3.875,
             "translationZ": 0.59375,
@@ -110,7 +110,7 @@
                 }
             ]
         },
-        "semaphore_signals/sema_distant_vr0": {
+        "semaphore_signals/sema_distant_arrow": {
             "translationX": 0.5,
             "translationY": 2.5,
             "translationZ": 0,
@@ -129,6 +129,44 @@
                     "mode": "ROTATION",
                     "rotationAxis": "Z",
                     "rotation": -45
+                }
+            ]
+        },
+        "semaphore_signals/sema_distant_lamp1": {
+            "translationX": 0,
+            "translationY": 2,
+            "translationZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "with(SEMATYPE.DIST) && (with(SEMAVR.VR0) || with(SEMAVR.VR2))",
+                    "mode": "TRANSLATION",
+                    "animationSpeed": 0.25,
+                    "destY": 0
+                },
+                {
+                    "predicate": "with(SEMATYPE.DIST) && with(SEMAVR.VR1)",
+                    "mode": "TRANSLATION",
+                    "animationSpeed": 0.25,
+                    "destY": -0.25
+                }
+            ]
+        },
+        "semaphore_signals/sema_distant_lamp2": {
+            "translationX": 0,
+            "translationY": 2,
+            "translationZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "with(SEMATYPE.DIST) && with(SEMAVR.VR0)",
+                    "mode": "TRANSLATION",
+                    "animationSpeed": 0.25,
+                    "destY": 0
+                },
+                {
+                    "predicate": "with(SEMATYPE.DIST) && (with(SEMAVR.VR1) || with(SEMAVR.VR2))",
+                    "mode": "TRANSLATION",
+                    "animationSpeed": 0.25,
+                    "destY": 0.25
                 }
             ]
         }

@@ -1,1 +1,117 @@
-{"credit": "Made with Blockbench by Mc_Jeronimo", "texture_size": [32, 32], "textures": {"0": "opensignals:blocks/default/mast", "2": "opensignals:blocks/default/shield_gray"}, "elements": [{"name": "mast", "from": [7, 0, 7], "to": [9, 16, 9], "faces": {"north": {"uv": [0, 0, 1, 8], "texture": "#0"}, "east": {"uv": [0, 0, 1, 8], "texture": "#0"}, "south": {"uv": [0, 0, 1, 8], "texture": "#0"}, "west": {"uv": [0, 0, 1, 8], "texture": "#0"}, "up": {"uv": [0, 0, 1, 1], "texture": "#0"}, "down": {"uv": [0, 0, 1, 1], "texture": "#0"}}}, {"name": "wire_wing4", "from": [7.75, 0, 10.5], "to": [8.25, 16, 11], "faces": {"north": {"uv": [0, 0, 0.25, 2.5], "texture": "#2"}, "east": {"uv": [0, 0, 0.25, 2.5], "texture": "#2"}, "south": {"uv": [0, 0, 0.25, 2.5], "texture": "#2"}, "west": {"uv": [0, 0, 0.25, 2.5], "texture": "#2"}}}, {"name": "bracket1", "from": [4, 19, 7], "to": [7, 21, 9], "faces": {"north": {"uv": [0, 0, 2, 2], "texture": "#0"}, "east": {"uv": [0, 0, 2, 2], "texture": "#0"}, "south": {"uv": [0, 0, 2, 2], "texture": "#0"}, "west": {"uv": [0, 0, 2, 2], "texture": "#0"}, "up": {"uv": [0, 0, 2, 2], "texture": "#0"}, "down": {"uv": [0, 0, 2, 2], "texture": "#0"}}}, {"name": "lamp1", "from": [0.5, 18, 7], "to": [4.5, 22, 11], "faces": {"north": {"uv": [0, 0, 2, 2], "texture": "#0"}, "east": {"uv": [0, 0, 2, 2], "texture": "#0"}, "south": {"uv": [0, 0, 2, 2], "texture": "#0"}, "west": {"uv": [0, 0, 2, 2], "texture": "#0"}, "up": {"uv": [0, 0, 2, 2], "texture": "#0"}, "down": {"uv": [0, 0, 2, 2], "texture": "#0"}}}, {"name": "lamp2", "from": [11.5, 3, 7], "to": [15.5, 7, 11], "faces": {"north": {"uv": [0, 0, 2, 2], "texture": "#0"}, "east": {"uv": [0, 0, 2, 2], "texture": "#0"}, "south": {"uv": [0, 0, 2, 2], "texture": "#0"}, "west": {"uv": [0, 0, 2, 2], "texture": "#0"}, "up": {"uv": [0, 0, 2, 2], "texture": "#0"}, "down": {"uv": [0, 0, 2, 2], "texture": "#0"}}}, {"name": "bracket2", "from": [9, 4, 7], "to": [11.5, 6, 9], "faces": {"north": {"uv": [0, 0, 2, 2], "texture": "#0"}, "east": {"uv": [0, 0, 2, 2], "texture": "#0"}, "south": {"uv": [0, 0, 2, 2], "texture": "#0"}, "west": {"uv": [0, 0, 2, 2], "texture": "#0"}, "up": {"uv": [0, 0, 2, 2], "texture": "#0"}, "down": {"uv": [0, 0, 2, 2], "texture": "#0"}}}, {"name": "bracket", "from": [7.5, 8, 4], "to": [8.5, 9, 7], "faces": {"north": {"uv": [0, 0, 0.5, 0.5], "texture": "#0"}, "east": {"uv": [0, 0, 1.5, 0.5], "texture": "#0"}, "south": {"uv": [0, 0, 0.5, 0.5], "texture": "#0"}, "west": {"uv": [0, 0, 1.5, 0.5], "texture": "#0"}, "up": {"uv": [0, 0, 0.5, 1.5], "texture": "#0"}, "down": {"uv": [0, 0, 0.5, 1.5], "texture": "#0"}}}], "groups": [{"name": "Formsignal_Vor", "origin": [0, -32, 0], "color": 0, "children": [{"name": "mast9", "origin": [0, -32, 0], "color": 0, "children": [0, 1, 2, 3, 4, 5, 6]}]}]}
+{
+	"credit": "Made with Blockbench by Mc_Jeronimo",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "opensignals:blocks/default/mast",
+		"2": "opensignals:blocks/default/shield_gray",
+		"particle": "opensignals:blocks/semaphore/lamp_yellow",
+		"lamp1": "opensignals:blocks/semaphore/lamp_yellow",
+		"lamp2": "opensignals:blocks/semaphore/lamp_yellow"
+	},
+	"elements": [
+		{
+			"name": "mast",
+			"from": [7, 0, 7],
+			"to": [9, 16, 9],
+			"faces": {
+				"north": {"uv": [0, 0, 1, 8], "texture": "#0"},
+				"east": {"uv": [0, 0, 1, 8], "texture": "#0"},
+				"south": {"uv": [0, 0, 1, 8], "texture": "#0"},
+				"west": {"uv": [0, 0, 1, 8], "texture": "#0"},
+				"up": {"uv": [0, 0, 1, 1], "texture": "#0"},
+				"down": {"uv": [0, 0, 1, 1], "texture": "#0"}
+			}
+		},
+		{
+			"name": "wire_wing4",
+			"from": [7.75, 0, 10.5],
+			"to": [8.25, 16, 11],
+			"faces": {
+				"north": {"uv": [0, 0, 0.25, 2.5], "texture": "#2"},
+				"east": {"uv": [0, 0, 0.25, 2.5], "texture": "#2"},
+				"south": {"uv": [0, 0, 0.25, 2.5], "texture": "#2"},
+				"west": {"uv": [0, 0, 0.25, 2.5], "texture": "#2"}
+			}
+		},
+		{
+			"name": "bracket1",
+			"from": [4.5, 19, 7],
+			"to": [7, 21, 9],
+			"faces": {
+				"north": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"east": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"south": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"west": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"up": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"down": {"uv": [0, 0, 2, 2], "texture": "#0"}
+			}
+		},
+		{
+			"name": "lamp1",
+			"from": [0.5, 18, 7],
+			"to": [4.5, 22, 11],
+			"faces": {
+				"north": {"uv": [0, 0, 4, 4], "texture": "#lamp1"},
+				"east": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"south": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"west": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"up": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"down": {"uv": [0, 0, 2, 2], "texture": "#0"}
+			}
+		},
+		{
+			"name": "lamp2",
+			"from": [11.5, 3, 7],
+			"to": [15.5, 7, 11],
+			"faces": {
+				"north": {"uv": [0, 0, 4, 4], "texture": "#lamp2"},
+				"east": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"south": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"west": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"up": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"down": {"uv": [0, 0, 2, 2], "texture": "#0"}
+			}
+		},
+		{
+			"name": "bracket2",
+			"from": [9, 4, 7],
+			"to": [11.5, 6, 9],
+			"faces": {
+				"north": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"east": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"south": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"west": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"up": {"uv": [0, 0, 2, 2], "texture": "#0"},
+				"down": {"uv": [0, 0, 2, 2], "texture": "#0"}
+			}
+		},
+		{
+			"name": "bracket",
+			"from": [7.5, 8, 4],
+			"to": [8.5, 9, 7],
+			"faces": {
+				"north": {"uv": [0, 0, 0.5, 0.5], "texture": "#0"},
+				"east": {"uv": [0, 0, 1.5, 0.5], "texture": "#0"},
+				"south": {"uv": [0, 0, 0.5, 0.5], "texture": "#0"},
+				"west": {"uv": [0, 0, 1.5, 0.5], "texture": "#0"},
+				"up": {"uv": [0, 0, 0.5, 1.5], "texture": "#0"},
+				"down": {"uv": [0, 0, 0.5, 1.5], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "Formsignal_Vor",
+			"origin": [0, -32, 0],
+			"color": 0,
+			"children": [
+				{
+					"name": "mast9",
+					"origin": [0, -32, 0],
+					"color": 0,
+					"children": [0, 1, 2, 3, 4, 5, 6]
+				}
+			]
+		}
+	]
+}

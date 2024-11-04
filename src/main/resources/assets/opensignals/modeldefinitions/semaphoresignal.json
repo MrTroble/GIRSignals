@@ -1,9 +1,10 @@
 {
 	"textures": {
-		"lamp_green": "opensignals:blocks/lamps/lamp_green",
 		"lamp_white": "opensignals:blocks/lamps/lamp_white",
-		"lamp_red": "opensignals:blocks/lamps/lamp_red",
-		"lamp_yellow": "opensignals:blocks/lamps/lamp_yellow"
+		"lamp_yellow": "opensignals:blocks/lamps/lamp_yellow",
+		"lamp_red_shield": "opensignals:blocks/semaphore/lamp_red",
+		"lamp_green_shield": "opensignals:blocks/semaphore/lamp_green",
+		"lamp_yellow_shield": "opensignals:blocks/semaphore/lamp_yellow"
 	},
 	"models": {
 		"semaphore_signals/sema_main_base": {
@@ -354,7 +355,20 @@
 		"semaphore_signals/sema_distant_mast2": {
 			"textures": [
 				{
-					"blockstate": "with(SEMATYPE.DIST)"
+					"blockstate": "with(SEMATYPE.DIST) && with(SEMAVR.VR0)"
+				},
+				{
+					"blockstate": "with(SEMATYPE.DIST) && with(SEMAVR.VR1)",
+					"retexture": {
+						"lamp1": "lamp_green_shield",
+						"lamp2": "lamp_green_shield"
+					}
+				},
+				{
+					"blockstate": "with(SEMATYPE.DIST) && with(SEMAVR.VR2)",
+					"retexture": {
+						"lamp2": "lamp_green_shield"
+					}
 				}
 			],
 			"y": 2

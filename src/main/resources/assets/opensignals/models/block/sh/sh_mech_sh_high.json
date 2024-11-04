@@ -8,8 +8,8 @@
 	"elements": [
 		{
 			"name": "sh",
-			"from": [4, 3, 4.9],
-			"to": [12, 11, 4.9],
+			"from": [3.5, 3, 4.9],
+			"to": [12.5, 11, 4.9],
 			"rotation": {"angle": 0, "axis": "z", "origin": [8, 7, 5]},
 			"faces": {
 				"north": {"uv": [0, 0, 16, 16], "texture": "#2"}

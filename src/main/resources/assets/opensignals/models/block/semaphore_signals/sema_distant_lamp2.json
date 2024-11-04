@@ -1,0 +1,52 @@
+{
+	"credit": "Made with Blockbench by Mc_Jeronimo",
+	"texture_size": [32, 32],
+	"textures": {
+		"1": "opensignals:blocks/default/shield_black",
+		"3": "opensignals:blocks/semaphore/lamps_shield_off",
+		"particle": "opensignals:blocks/default/shield_black"
+	},
+	"elements": [
+		{
+			"name": "shield",
+			"from": [-0.5, 13, 6],
+			"to": [5.5, 23, 7],
+			"faces": {
+				"north": {"uv": [0, 0, 10, 6], "rotation": 270, "texture": "#3"},
+				"east": {"uv": [0, 0, 0.5, 5], "texture": "#1"},
+				"south": {"uv": [0, 0, 3, 5], "texture": "#1"},
+				"west": {"uv": [0, 0, 0.5, 5], "texture": "#1"},
+				"up": {"uv": [0, 0, 3, 0.5], "texture": "#1"},
+				"down": {"uv": [0, 0, 3, 0.5], "texture": "#1"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "Formsignal_Vor",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"children": [
+				{
+					"name": "vr2",
+					"origin": [0, -32, 0],
+					"color": 0,
+					"children": []
+				}
+			]
+		},
+		{
+			"name": "Formsignal_Vor",
+			"origin": [0, -32, 0],
+			"color": 0,
+			"children": [
+				{
+					"name": "lamp3",
+					"origin": [-1, 88, -5.5],
+					"color": 0,
+					"children": [0]
+				}
+			]
+		}
+	]
+}
