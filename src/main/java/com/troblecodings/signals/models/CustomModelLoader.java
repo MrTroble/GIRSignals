@@ -7,8 +7,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Predicate;
 
+import com.troblecodings.core.VectorWrapper;
 import com.troblecodings.signals.OpenSignalsMain;
+import com.troblecodings.signals.animation.SignalAnimation;
 import com.troblecodings.signals.blocks.Signal;
+import com.troblecodings.signals.contentpacks.SignalAnimationConfigParser;
 import com.troblecodings.signals.core.SignalAngel;
 import com.troblecodings.signals.parser.FunctionParsingInfo;
 import com.troblecodings.signals.parser.LogicParser;
@@ -210,6 +213,15 @@ public final class CustomModelLoader implements ResourceManagerReloadListener {
                             return;
                         }
                     }
+                }
+                SignalAnimationConfigParser.loadAllAnimations();
+                final Map<Entry<String, VectorWrapper>, List<SignalAnimation>> animations = //
+                        SignalAnimationConfigParser.ALL_ANIMATIONS.get(signaltype);
+                if (animations != null) {
+                    animations.keySet()
+                            .forEach(entry -> accumulator.add(
+                                    new SignalModelLoaderInfo(entry.getKey(), predicate -> false, 0,
+                                            0, 0, new HashMap<>()).setOnAnimation()));
                 }
                 registeredModels.put(lowercaseName, accumulator);
             }

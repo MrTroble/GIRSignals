@@ -1,28 +1,45 @@
 package com.troblecodings.signals.guis;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 import com.mojang.math.Quaternion;
+import com.troblecodings.core.VectorWrapper;
 import com.troblecodings.guilib.ecs.entitys.UIBlockRender;
 import com.troblecodings.guilib.ecs.entitys.UIBlockRenderInfo;
 import com.troblecodings.guilib.ecs.entitys.UIEntity;
+import com.troblecodings.guilib.ecs.entitys.UIMultiBlockRender;
 import com.troblecodings.guilib.ecs.entitys.input.UIDrag;
 import com.troblecodings.guilib.ecs.entitys.render.UIColor;
 import com.troblecodings.guilib.ecs.entitys.render.UIScissor;
+import com.troblecodings.signals.OpenSignalsMain;
 import com.troblecodings.signals.SEProperty;
+import com.troblecodings.signals.animation.ModelTranslation;
+import com.troblecodings.signals.animation.SignalAnimation;
 import com.troblecodings.signals.blocks.Signal;
+import com.troblecodings.signals.contentpacks.SignalAnimationConfigParser;
 import com.troblecodings.signals.enums.ChangeableStage;
 import com.troblecodings.signals.models.ModelInfoWrapper;
+import com.troblecodings.signals.models.SignalCustomModel;
+
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.resources.ResourceLocation;
 
 public class PreviewSideBar {
     public static final float MODIFIER = 0.1f;
 
-    private final UIBlockRender blockRender;
+    private UIBlockRender blockRender;
     private final Map<SEProperty, String> properties = new HashMap<>();
     private final UIEntity blockRenderEntity = new UIEntity();
+    private final float height;
+    private final List<UIBlockRenderInfo> animationInfos = new ArrayList<>();
 
     public PreviewSideBar(final float height) {
+        this.height = height;
         blockRender = new UIBlockRender(20, height);
         blockRenderEntity.setInheritHeight(true);
         blockRenderEntity.setWidth(60);
@@ -69,8 +86,41 @@ public class PreviewSideBar {
         properties.clear();
     }
 
+    private void buildRenderListForAnimations(final Signal signal, final ModelInfoWrapper wrapper) {
+        animationInfos.clear();
+        final Map<Entry<String, VectorWrapper>, List<SignalAnimation>> //
+        map = SignalAnimationConfigParser.ALL_ANIMATIONS.get(signal);
+        map.forEach((entry, list) -> {
+            for (final SignalAnimation animation : list) {
+                final Predicate<ModelInfoWrapper> predicate = animation.getPredicate();
+                final ModelTranslation modelTranslation = animation.getFinalModelTranslation();
+                modelTranslation.setModelTranslation(entry.getValue().copy());
+
+                final BakedModel model = SignalCustomModel.getModelFromLocation(
+                        new ResourceLocation(OpenSignalsMain.MODID, entry.getKey()));
+
+                final UIBlockRenderInfo info = new UIBlockRenderInfo(model,
+                        signal.defaultBlockState(), wrapper, new VectorWrapper(0.5f, 0.5f, 0.5f));
+                info.predicate = p -> predicate.test(wrapper);
+                info.consumer = d -> {
+                    modelTranslation.translate(d.stack);
+                };
+                animationInfos.add(info);
+            }
+        });
+    }
+
     public void update(final Signal signal) {
-        blockRender.setBlockState(new UIBlockRenderInfo(signal.defaultBlockState(),
-                new ModelInfoWrapper(properties)));
+        final ModelInfoWrapper wrapper = new ModelInfoWrapper(properties);
+        blockRenderEntity.remove(blockRender);
+        if (signal.hasAnimation()) {
+            buildRenderListForAnimations(signal, wrapper);
+            blockRender = new UIMultiBlockRender(20, height);
+            animationInfos.forEach(blockRender::setBlockState);
+        } else {
+            blockRender = new UIBlockRender(20, height);
+        }
+        blockRender.setBlockState(new UIBlockRenderInfo(signal.defaultBlockState(), wrapper));
+        blockRenderEntity.add(blockRender);
     }
 }

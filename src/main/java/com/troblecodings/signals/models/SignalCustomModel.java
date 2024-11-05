@@ -25,6 +25,7 @@ import com.mojang.math.Vector4f;
 import com.troblecodings.signals.OpenSignalsMain;
 import com.troblecodings.signals.core.SignalAngel;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -44,6 +45,8 @@ import net.minecraftforge.client.model.data.EmptyModelData;
 
 @OnlyIn(Dist.CLIENT)
 public class SignalCustomModel implements UnbakedModel {
+
+    private static final Map<ResourceLocation, BakedModel> locationToModel = new HashMap<>();
 
     @Nonnull
     public static final Random RANDOM = new Random();
@@ -81,9 +84,8 @@ public class SignalCustomModel implements UnbakedModel {
         }
     }
 
-    private static BakedModelPair transform(final SignalModelLoaderInfo info,
-            final ModelBakery bakery, final ResourceLocation location,
-            final Function<Material, TextureAtlasSprite> function,
+    private BakedModelPair transform(final SignalModelLoaderInfo info, final ModelBakery bakery,
+            final ResourceLocation location, final Function<Material, TextureAtlasSprite> function,
             final Map<String, Either<Material, String>> material, final Quaternion rotation) {
         final Transformation transformation = new Transformation(
                 new Vector3f(info.x, info.y, info.z), null, null, null);
@@ -109,6 +111,10 @@ public class SignalCustomModel implements UnbakedModel {
         for (final Direction direction : Direction.values()) {
             model.getQuads(null, direction, RANDOM, EmptyModelData.INSTANCE)
                     .forEach(quad -> transform(quad, matrix));
+        }
+
+        if (angel.equals(SignalAngel.ANGEL0) && info.isAnimation) {
+            locationToModel.put(new ResourceLocation(OpenSignalsMain.MODID, info.name), model);
         }
         return new BakedModelPair(info.state, model);
     }
@@ -152,5 +158,10 @@ public class SignalCustomModel implements UnbakedModel {
                         .map(info -> transform(info, bakery, resource, function,
                                 materialsFromString, quaternion))
                         .collect(Collectors.toUnmodifiableList()));
+    }
+
+    public static BakedModel getModelFromLocation(final ResourceLocation location) {
+        return locationToModel.getOrDefault(location,
+                Minecraft.getInstance().getModelManager().getMissingModel());
     }
 }

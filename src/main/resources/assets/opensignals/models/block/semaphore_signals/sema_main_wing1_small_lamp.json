@@ -1,0 +1,42 @@
+{
+	"credit": "Made with Blockbench by Mc_Jeronimo",
+	"texture_size": [32, 32],
+	"textures": {
+		"8": "opensignals:blocks/semaphore/lamps_shield_off",
+		"particle": "opensignals:blocks/semaphore/lamps_shield_off"
+	},
+	"elements": [
+		{
+			"name": "shield",
+			"from": [-3.6434, 0.06802, 5.4],
+			"to": [6.3566, 6.06802, 5.4],
+			"rotation": {"angle": -45, "axis": "z", "origin": [0, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 0, 10, 6], "texture": "#8"},
+				"south": {"uv": [0, 0, 10, 6], "texture": "#8"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "Formsignal_Haupt",
+			"origin": [0, -112, 0],
+			"color": 0,
+			"children": [
+				{
+					"name": "wing1",
+					"origin": [0, 9, -5.5],
+					"color": 0,
+					"children": [
+						{
+							"name": "lamp1",
+							"origin": [-1, 8, -5.5],
+							"color": 0,
+							"children": [0]
+						}
+					]
+				}
+			]
+		}
+	]
+}

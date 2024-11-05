@@ -55,10 +55,11 @@ public class SignalPropertiesBuilder {
                 }
             }
         }
-        if (placementtool == null)
+        if (placementtool == null) {
             OpenSignalsMain.exitMinecraftWithMessage(
                     "There doesn't exists a placementtool with the name '" + placementToolName
                             + "'! Valid Placementtools: " + OSItems.placementtools);
+        }
 
         final List<PredicateProperty<Integer>> signalheights = new ArrayList<>();
         if (signalHeights != null) {
