@@ -13,6 +13,7 @@ import com.google.common.collect.ImmutableList;
 import com.troblecodings.signals.OpenSignalsMain;
 import com.troblecodings.signals.SEProperty;
 import com.troblecodings.signals.config.ConfigHandler;
+import com.troblecodings.signals.contentpacks.SignalAnimationConfigParser;
 import com.troblecodings.signals.core.DestroyHelper;
 import com.troblecodings.signals.core.JsonEnum;
 import com.troblecodings.signals.core.RenderOverlayInfo;
@@ -71,8 +72,8 @@ public class Signal extends BasicBlock {
 
     public static final Map<String, Signal> SIGNALS = new HashMap<>();
     public static final List<Signal> SIGNAL_IDS = new ArrayList<>();
-    public static final PropertyEnum<SignalAngel> ANGEL =
-            PropertyEnum.create("angel", SignalAngel.class);
+    public static final PropertyEnum<SignalAngel> ANGEL = PropertyEnum.create("angel",
+            SignalAngel.class);
     public static final SEProperty CUSTOMNAME = new SEProperty("customname", JsonEnum.BOOLEAN,
             "false", ChangeableStage.AUTOMATICSTAGE, t -> true, 0);
     public static final TileEntitySupplierWrapper SUPPLIER = SignalTileEntity::new;
@@ -148,8 +149,8 @@ public class Signal extends BasicBlock {
     public IBlockState getStateForPlacement(final World world, final BlockPos pos,
             final EnumFacing facing, final float hitX, final float hitY, final float hitZ,
             final int meta, final EntityLivingBase placer, final EnumHand hand) {
-        final int index =
-                15 - (MathHelper.floor(placer.getRotationYawHead() * 16.0F / 360.0F - 0.5D) & 15);
+        final int index = 15
+                - (MathHelper.floor(placer.getRotationYawHead() * 16.0F / 360.0F - 0.5D) & 15);
         return getDefaultState().withProperty(ANGEL, SignalAngel.values()[index]);
     }
 
@@ -532,5 +533,9 @@ public class Signal extends BasicBlock {
     @Override
     public TileEntity createNewTileEntity(final World worldIn, final int meta) {
         return new SignalTileEntity();
+    }
+
+    public boolean hasAnimation() {
+        return SignalAnimationConfigParser.ALL_ANIMATIONS.containsKey(this);
     }
 }

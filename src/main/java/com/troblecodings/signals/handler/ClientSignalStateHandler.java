@@ -10,10 +10,12 @@ import com.troblecodings.core.interfaces.INetworkSync;
 import com.troblecodings.signals.SEProperty;
 import com.troblecodings.signals.blocks.Signal;
 import com.troblecodings.signals.core.StateInfo;
+import com.troblecodings.signals.tileentitys.SignalTileEntity;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -51,9 +53,11 @@ public class ClientSignalStateHandler implements INetworkSync {
         }
         final List<SEProperty> signalProperties = Signal.SIGNAL_IDS.get(signalID).getProperties();
         final StateInfo stateInfo = new StateInfo(level, signalPos);
+        final boolean contains;
+        final Map<SEProperty, String> properties;
         synchronized (CURRENTLY_LOADED_STATES) {
-            final Map<SEProperty, String> properties = CURRENTLY_LOADED_STATES
-                    .computeIfAbsent(stateInfo, _u -> new HashMap<>());
+            contains = CURRENTLY_LOADED_STATES.containsKey(stateInfo);
+            properties = CURRENTLY_LOADED_STATES.computeIfAbsent(stateInfo, _u -> new HashMap<>());
 
             for (int i = 0; i < propertiesSize; i++) {
                 final SEProperty property = signalProperties.get(propertyIDs[i]);
@@ -63,6 +67,10 @@ public class ClientSignalStateHandler implements INetworkSync {
             CURRENTLY_LOADED_STATES.put(stateInfo, properties);
         }
         mc.addScheduledTask(() -> {
+            final TileEntity tile = level.getTileEntity(signalPos);
+            if (tile != null && tile instanceof SignalTileEntity) {
+                ((SignalTileEntity) tile).updateAnimationStates(properties, contains);
+            }
             final Chunk chunk = level.getChunkFromBlockCoords(signalPos);
             if (chunk == null)
                 return;

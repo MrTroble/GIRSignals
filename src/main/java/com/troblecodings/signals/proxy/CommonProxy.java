@@ -15,14 +15,15 @@ import com.troblecodings.signals.blocks.TrainNumberBlock;
 import com.troblecodings.signals.contentpacks.ChangeConfigParser;
 import com.troblecodings.signals.contentpacks.OneSignalNonPredicateConfigParser;
 import com.troblecodings.signals.contentpacks.OneSignalPredicateConfigParser;
+import com.troblecodings.signals.contentpacks.SignalAnimationConfigParser;
 import com.troblecodings.signals.contentpacks.SubsidiarySignalParser;
+import com.troblecodings.signals.guis.ContainerPathwayRequester;
 import com.troblecodings.signals.guis.ContainerPlacementtool;
 import com.troblecodings.signals.guis.ContainerSignalBox;
-import com.troblecodings.signals.guis.ContainerSignalController;
-import com.troblecodings.signals.guis.NamableContainer;
-import com.troblecodings.signals.guis.ContainerPathwayRequester;
 import com.troblecodings.signals.guis.ContainerSignalBridge;
+import com.troblecodings.signals.guis.ContainerSignalController;
 import com.troblecodings.signals.guis.ContainerTrainNumber;
+import com.troblecodings.signals.guis.NamableContainer;
 import com.troblecodings.signals.handler.NameHandler;
 import com.troblecodings.signals.handler.SignalStateHandler;
 import com.troblecodings.signals.init.OSBlocks;
@@ -61,5 +62,6 @@ public class CommonProxy {
         ChangeConfigParser.loadChangeConfigs();
         OneSignalPredicateConfigParser.loadAllOneSignalPredicateConfigs();
         SubsidiarySignalParser.loadAllSubsidiarySignals();
+        SignalAnimationConfigParser.loadAllAnimations();
     }
 }

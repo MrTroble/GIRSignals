@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 import javax.vecmath.AxisAngle4f;
 import javax.vecmath.Matrix4f;
@@ -38,15 +37,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class SignalCustomModel implements IModel {
 
-    private final HashMap<Predicate<ModelInfoWrapper>, Pair<IModel, Vector3f>> modelCache = new HashMap<>();
+    private static final Map<ResourceLocation, IBakedModel> locationToModel = new HashMap<>();
+
+    private final HashMap<SignalModelLoaderInfo, Pair<IModel, Vector3f>> modelCache = new HashMap<>();
     private List<ResourceLocation> textures = new ArrayList<>();
     private IBakedModel cachedModel = null;
     private SignalAngel angel = SignalAngel.ANGEL0;
     private final Matrix4f rotation;
 
     public SignalCustomModel(final List<SignalModelLoaderInfo> infos, final SignalAngel facing) {
-        infos.forEach(
-                info -> register(info.name, info.state, info.x, info.y, info.z, info.retexture));
+        infos.forEach(this::register);
         this.textures = ImmutableList.copyOf(textures);
         this.angel = facing;
         final Matrix4f mat = new Matrix4f();
@@ -96,6 +96,7 @@ public class SignalCustomModel implements IModel {
             }
             faceOutgoing.put(face, current.build());
         }
+
         return new SimpleBakedModel(outgoing.build(), faceOutgoing.build(),
                 model.isAmbientOcclusion(), model.isGui3d(), model.getParticleTexture(),
                 model.getItemCameraTransforms(), model.getOverrides());
@@ -106,14 +107,20 @@ public class SignalCustomModel implements IModel {
             final Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         if (cachedModel == null) {
             final MultipartBakedModel.Builder build = new MultipartBakedModel.Builder();
-            modelCache.forEach((pr, m) -> {
+            modelCache.forEach((info, m) -> {
                 final IModel model = m.first();
                 final Vector3f f = m.second();
                 final TRSRTransformation baseState = new TRSRTransformation(f, null, null, null);
+                final IBakedModel bakedModel = transform(
+                        model.bake(baseState, format, bakedTextureGetter));
                 build.putModel(
-                        blockstate -> pr
+                        blockstate -> info.state
                                 .test(new ModelInfoWrapper((IExtendedBlockState) blockstate)),
-                        transform(model.bake(baseState, format, bakedTextureGetter)));
+                        bakedModel);
+                if (angel.equals(SignalAngel.ANGEL0) && info.isAnimation) {
+                    locationToModel.put(new ResourceLocation(OpenSignalsMain.MODID, info.name),
+                            bakedModel);
+                }
             });
             return cachedModel = build.makeMultipartModel();
         }
@@ -130,22 +137,25 @@ public class SignalCustomModel implements IModel {
         return textures;
     }
 
-    protected void register(final String name, final Predicate<ModelInfoWrapper> state,
-            final float x, final float y, final float z, final Map<String, String> map) {
+    protected void register(final SignalModelLoaderInfo info) {
         IModel m = ModelLoaderRegistry.getModelOrLogError(
-                new ResourceLocation(OpenSignalsMain.MODID, "block/" + name),
-                "Couldn't find " + name);
+                new ResourceLocation(OpenSignalsMain.MODID, "block/" + info.name),
+                "Couldn't find " + info.name);
         m = m.smoothLighting(false);
 
-        if (map != null && !map.isEmpty()) {
+        if (!info.retexture.isEmpty()) {
             final Builder<String, String> build = ImmutableMap.builder();
-            for (final Map.Entry<String, String> entry : map.entrySet())
+            for (final Map.Entry<String, String> entry : info.retexture.entrySet())
                 build.put(entry.getKey(), entry.getValue());
 
             m = m.retexture(build.build());
         }
 
         m.getTextures().stream().filter(rs -> !textures.contains(rs)).forEach(textures::add);
-        modelCache.put(state, Pair.of(m, new Vector3f(x, y, z)));
+        modelCache.put(info, Pair.of(m, new Vector3f(info.x, info.y, info.z)));
+    }
+
+    public static IBakedModel getModelFromLocation(final ResourceLocation location) {
+        return locationToModel.get(location);
     }
 }

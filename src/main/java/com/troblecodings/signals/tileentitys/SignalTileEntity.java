@@ -7,6 +7,7 @@ import com.google.common.collect.ImmutableMap;
 import com.troblecodings.core.interfaces.NamableWrapper;
 import com.troblecodings.guilib.ecs.interfaces.ISyncable;
 import com.troblecodings.signals.SEProperty;
+import com.troblecodings.signals.animation.SignalAnimationHandler;
 import com.troblecodings.signals.blocks.Signal;
 import com.troblecodings.signals.core.RenderOverlayInfo;
 import com.troblecodings.signals.core.SignalStateListener;
@@ -19,7 +20,13 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class SignalTileEntity extends SyncableTileEntity implements NamableWrapper, ISyncable {
 
+    protected final SignalAnimationHandler handler;
+
     private final Map<SEProperty, String> properties = new HashMap<>();
+
+    public SignalTileEntity() {
+        this.handler = new SignalAnimationHandler(this);
+    }
 
     private final SignalStateListener listener = (info, states, changed) -> {
         switch (changed) {
@@ -48,11 +55,19 @@ public class SignalTileEntity extends SyncableTileEntity implements NamableWrapp
     }
 
     public void renderOverlay(final RenderOverlayInfo info) {
-        getSignal().renderOverlay(info.with(this));
         final Signal signal = getSignal();
         if (signal == null)
             return;
         signal.renderOverlay(info.with(this));
+    }
+
+    public SignalAnimationHandler getAnimationHandler() {
+        return handler;
+    }
+
+    public void updateAnimationStates(final Map<SEProperty, String> properties,
+            final boolean firstLoad) {
+        handler.updateStates(properties, firstLoad);
     }
 
     @Override
@@ -81,6 +96,9 @@ public class SignalTileEntity extends SyncableTileEntity implements NamableWrapp
             world.markBlockRangeForRenderUpdate(pos, pos);
             markDirty();
             SignalStateHandler.addListener(new SignalStateInfo(world, pos, getSignal()), listener);
+        } else {
+            if (getSignal().hasAnimation())
+                handler.updateAnimationListFromBlock();
         }
     }
 

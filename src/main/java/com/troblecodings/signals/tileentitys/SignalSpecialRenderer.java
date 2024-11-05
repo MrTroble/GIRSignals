@@ -7,11 +7,14 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 public class SignalSpecialRenderer extends TileEntitySpecialRenderer<SignalTileEntity> {
 
     @Override
-    public void render(final SignalTileEntity te, final double x, final double y, final double z,
+    public void render(final SignalTileEntity tile, final double x, final double y, final double z,
             final float partialTicks, final int destroyStage, final float alpha) {
-        if (!te.hasCustomName())
-            return;
-        te.renderOverlay(new RenderOverlayInfo(x, y, z, getFontRenderer()));
+        if (tile.hasCustomName()) {
+            tile.renderOverlay(new RenderOverlayInfo(x, y, z, getFontRenderer()));
+        }
+        if (tile.getSignal().hasAnimation()) {
+            tile.getAnimationHandler().render();
+        }
     }
 
     @Override

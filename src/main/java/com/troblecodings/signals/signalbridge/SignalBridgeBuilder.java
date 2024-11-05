@@ -85,7 +85,7 @@ public class SignalBridgeBuilder {
 
     public boolean hasBlockOn(final VectorWrapper vec, final Entry<String, Signal> entry) {
         final boolean isCollidingWithBlock = vec.getZ() == 0
-                ? pointForBlocks.containsKey(new Point(vec.getX(), vec.getY()))
+                ? pointForBlocks.containsKey(new Point((int) vec.getX(), (int) vec.getY()))
                 : false;
         final VectorWrapper signalVec = vecForSignal.get(entry);
         return isCollidingWithBlock || (!vec.equals(signalVec) && vecForSignal.containsValue(vec));

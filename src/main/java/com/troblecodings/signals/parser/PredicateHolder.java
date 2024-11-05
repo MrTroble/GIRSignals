@@ -23,8 +23,8 @@ public final class PredicateHolder {
     @SuppressWarnings("unchecked")
     public static Predicate<ModelInfoWrapper> with(final ValuePack pack) {
         return ebs -> {
-            final Object test = ebs.get(pack.property);
-            return test != null && pack.predicate.test(test);
+            final String test = ebs.get(pack.property);
+            return test != null && pack.predicate.test(test.toUpperCase());
         };
     }
 
