@@ -22,6 +22,30 @@
                 }
             ]
         },
+        "semaphore_signals/sema_main_wing1_lamp": {
+            "translationX": 0.6875,
+            "translationY": 7.5625,
+            "translationZ": 0,
+            "pivotX": -0.6875,
+            "pivotY": -0.5625,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "with(WING1.FALSE) && with(SEMATYPE.MAIN)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "animationSpeed": 0.5,
+                    "rotation": 0
+                },
+                {
+                    "predicate": "with(WING1.TRUE) && with(SEMATYPE.MAIN)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "animationSpeed": 0.5,
+                    "rotation": -25
+                }
+            ]
+        },
         "semaphore_signals/sema_main_wing2": {
             "translationX": 0.6875,
             "translationY": 5.5625,
@@ -41,6 +65,30 @@
                     "mode": "ROTATION",
                     "rotationAxis": "Z",
                     "rotation": 45
+                }
+            ]
+        },
+        "semaphore_signals/sema_main_wing2_lamp": {
+            "translationX": 0.6875,
+            "translationY": 5.5625,
+            "translationZ": 0,
+            "pivotX": -0.6875,
+            "pivotY": -0.5625,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "with(WING2.FALSE) && with(SEMATYPE.MAIN)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "animationSpeed": 0.5,
+                    "rotation": 0
+                },
+                {
+                    "predicate": "with(WING2.TRUE) && with(SEMATYPE.MAIN)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "animationSpeed": 0.5,
+                    "rotation": -25
                 }
             ]
         },
@@ -66,6 +114,30 @@
                 }
             ]
         },
+        "semaphore_signals/sema_main_wing1_small_lamp": {
+            "translationX": 0.6875,
+            "translationY": 4.5625,
+            "translationZ": 0,
+            "pivotX": -0.6875,
+            "pivotY": -0.5625,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "!hasandis(WING1) && with(SEMATYPE.MAIN_SMALL)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "animationSpeed": 0.5,
+                    "rotation": 0
+                },
+                {
+                    "predicate": "hasandis(WING1) && with(SEMATYPE.MAIN_SMALL)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "animationSpeed": 0.5,
+                    "rotation": -25
+                }
+            ]
+        },
         "semaphore_signals/sema_main_wing2_small": {
             "translationX": 0.6875,
             "translationY": 2.5625,
@@ -85,6 +157,30 @@
                     "mode": "ROTATION",
                     "rotationAxis": "Z",
                     "rotation": 45
+                }
+            ]
+        },
+        "semaphore_signals/sema_main_wing2_small_lamp": {
+            "translationX": 0.6875,
+            "translationY": 2.5625,
+            "translationZ": 0,
+            "pivotX": -0.6875,
+            "pivotY": -0.5625,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "!hasandis(WING2) && with(SEMATYPE.MAIN_SMALL)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "animationSpeed": 0.5,
+                    "rotation": 0
+                },
+                {
+                    "predicate": "hasandis(WING2) && with(SEMATYPE.MAIN_SMALL)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "animationSpeed": 0.5,
+                    "rotation": -25
                 }
             ]
         },
