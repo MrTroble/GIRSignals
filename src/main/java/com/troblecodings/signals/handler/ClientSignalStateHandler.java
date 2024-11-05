@@ -69,7 +69,7 @@ public class ClientSignalStateHandler implements INetworkSync {
         mc.addScheduledTask(() -> {
             final TileEntity tile = level.getTileEntity(signalPos);
             if (tile != null && tile instanceof SignalTileEntity) {
-                ((SignalTileEntity) tile).updateAnimationStates(properties, contains);
+                ((SignalTileEntity) tile).updateAnimationStates(properties, !contains);
             }
             final Chunk chunk = level.getChunkFromBlockCoords(signalPos);
             if (chunk == null)

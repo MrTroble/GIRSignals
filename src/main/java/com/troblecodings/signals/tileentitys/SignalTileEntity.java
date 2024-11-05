@@ -84,6 +84,13 @@ public class SignalTileEntity extends SyncableTileEntity implements NamableWrapp
         return block instanceof Signal ? (Signal) block : null;
     }
 
+    public boolean hasAnimation() {
+        final Signal signal = getSignal();
+        if (signal == null)
+            return false;
+        return signal.hasAnimation();
+    }
+
     public Map<SEProperty, String> getProperties() {
         return ImmutableMap.copyOf(properties);
     }

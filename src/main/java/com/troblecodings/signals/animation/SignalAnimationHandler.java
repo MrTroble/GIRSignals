@@ -34,6 +34,8 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.client.model.pipeline.LightUtil;
 
 public class SignalAnimationHandler {
@@ -44,23 +46,25 @@ public class SignalAnimationHandler {
         this.tile = tile;
     }
 
-    private final Map<BufferBuilder, Entry<ModelTranslation, List<SignalAnimation>>>//
+    private final Map<Entry<IBakedModel, BufferBuilder>, Entry<ModelTranslation, List<SignalAnimation>>>//
     animationPerModel = new HashMap<>();
 
-    public void render() {
-        final IBlockState state = tile.getWorld().getBlockState(tile.getPos());
+    public void render(final VectorWrapper vector) {
+        final World world = tile.getWorld();
+        final BlockPos pos = tile.getPos();
+        final IBlockState state = world.getBlockState(pos);
         final SignalAngel angle = state.getValue(Signal.ANGEL);
 
-        animationPerModel.forEach((buffer, entry) -> {
+        animationPerModel.forEach((first, entry) -> {
             final ModelTranslation translation = entry.getKey();
             if (!translation.shouldRenderModel())
                 return;
-
+            GlStateManager.enableAlpha();
             GlStateManager.pushMatrix();
-            GlStateManager.translate(0.5f, 0.5f, 0.5f);
-            GlStateManager.rotate(angle.getDregree(), 0, 1, 0);
+            GlStateManager.translate(vector.getX(), vector.getY(), vector.getZ());
             translation.translate();
-            drawBuffer(buffer);
+            GlStateManager.rotate(angle.getDregree(), 0, 1, 0);
+            drawBuffer(first.getValue());
             GlStateManager.popMatrix();
 
             if (translation.isAnimationAssigned()) {
@@ -154,17 +158,19 @@ public class SignalAnimationHandler {
             final ModelTranslation translation = new ModelTranslation(VectorWrapper.ZERO,
                     new Quaternion(0, 0, 0, 0));
             translation.setModelTranslation(entry.getValue().copy());
-            final BufferBuilder buffer = getBufferFromModel(model);
-            animationPerModel.put(buffer, Maps.immutableEntry(translation, animations.stream()
-                    .map(animation -> animation.copy()).collect(Collectors.toList())));
+            final BufferBuilder buffer = getBufferFromModel(model, entry.getValue().copy());
+            animationPerModel.put(Maps.immutableEntry(model, buffer),
+                    Maps.immutableEntry(translation, animations.stream()
+                            .map(animation -> animation.copy()).collect(Collectors.toList())));
         });
     }
 
-    private BufferBuilder getBufferFromModel(final IBakedModel model) {
+    private BufferBuilder getBufferFromModel(final IBakedModel model, final VectorWrapper vec) {
         final BufferBuilder buffer = new BufferBuilder(500);
         final IBlockState ebs = tile.getWorld().getBlockState(tile.getPos());
         assert ebs != null;
         buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
+        buffer.setTranslation(vec.getX(), vec.getY(), vec.getZ());
         final List<BakedQuad> lst = new ArrayList<>();
         lst.addAll(model.getQuads(ebs, null, 0));
         for (final EnumFacing face : EnumFacing.VALUES)

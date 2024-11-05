@@ -1,5 +1,6 @@
 package com.troblecodings.signals.tileentitys;
 
+import com.troblecodings.core.VectorWrapper;
 import com.troblecodings.signals.core.RenderOverlayInfo;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -13,12 +14,12 @@ public class SignalSpecialRenderer extends TileEntitySpecialRenderer<SignalTileE
             tile.renderOverlay(new RenderOverlayInfo(x, y, z, getFontRenderer()));
         }
         if (tile.getSignal().hasAnimation()) {
-            tile.getAnimationHandler().render();
+            tile.getAnimationHandler().render(new VectorWrapper((float) x, (float) y, (float) z));
         }
     }
 
     @Override
     public boolean isGlobalRenderer(final SignalTileEntity te) {
-        return te.hasCustomName();
+        return te.hasCustomName() || te.hasAnimation();
     }
 }
