@@ -13,42 +13,6 @@
 			],
 			"y": 0
 		},
-		"sh/sh0_mech": {
-			"textures": [
-				{
-					"blockstate": "with(SH_MECH.SH0) && hasandisnot(sh_high)"
-				},
-				{
-					"blockstate": "with(SH_MECH.SH0) && hasandis(sh_high)",
-					"y": 2
-				}
-			],
-			"y": 0
-		},
-		"sh/sh1_mech": {
-			"textures": [
-				{
-					"blockstate": "with(SH_MECH.SH1) && hasandisnot(sh_high)"
-				},
-				{
-					"blockstate": "with(SH_MECH.SH1) && hasandis(sh_high)",
-					"y": 2
-				}
-			],
-			"y": 0
-		},
-		"sh/sh1_gsp2_mech": {
-			"textures": [
-				{
-					"blockstate": "with(SH_MECH.SH1_GSP2) && hasandisnot(sh_high)"
-				},
-				{
-					"blockstate": "with(SH_MECH.SH1_GSP2) && hasandis(sh_high)",
-					"y": 2
-				}
-			],
-			"y": 0
-		},
 		"sh/sh_mech_number": {
 			"textures": [
 				{
@@ -56,6 +20,18 @@
 				},
 				{
 					"blockstate": "hasandis(CUSTOMNAME) && hasandis(sh_high)",
+					"y": 2
+				}
+			],
+			"y": 0
+		},
+		"sh/sh_mech": {
+			"textures": [
+				{
+					"blockstate": "hasandisnot(sh_high)"
+				},
+				{
+					"blockstate": "hasandis(sh_high)",
 					"y": 2
 				}
 			],

@@ -1,1 +1,91 @@
-{"credit": "Made with Blockbench by Mc_Jeronimo", "texture_size": [32, 32], "textures": {"0": "opensignals:blocks/default/mast", "1": "opensignals:blocks/default/shield_black", "2": "opensignals:blocks/default/shield_gray"}, "elements": [{"name": "wire_wing2", "from": [11, 0, 8.25], "to": [11.5, 11, 8.75], "faces": {"north": {"uv": [0, 0, 0.25, 5.5], "texture": "#2"}, "east": {"uv": [0, 0, 0.25, 5.5], "texture": "#2"}, "south": {"uv": [0, 0, 0.25, 5.5], "texture": "#2"}, "west": {"uv": [0, 0, 0.25, 5.5], "texture": "#2"}}}, {"name": "mast", "from": [10.5, 8, 6.5], "to": [12, 9, 9], "faces": {"north": {"uv": [0, 0, 0.75, 0.5], "texture": "#1"}, "east": {"uv": [0, 0, 1.25, 0.5], "texture": "#1"}, "south": {"uv": [0, 0, 0.75, 0.5], "texture": "#1"}, "west": {"uv": [0, 0, 1.25, 0.5], "texture": "#1"}, "up": {"uv": [0, 0, 0.75, 1.25], "texture": "#1"}, "down": {"uv": [0, 0, 0.75, 1.25], "texture": "#1"}}}, {"name": "mast", "from": [10.5, 8, 2.5], "to": [11.5, 9, 5.5], "faces": {"north": {"uv": [0, 0, 0.5, 0.5], "texture": "#0"}, "east": {"uv": [0, 0, 1.5, 0.5], "texture": "#0"}, "south": {"uv": [0, 0, 0.5, 0.5], "texture": "#0"}, "west": {"uv": [0, 0, 1.5, 0.5], "texture": "#0"}, "up": {"uv": [0, 0, 0.5, 1.5], "texture": "#0"}, "down": {"uv": [0, 0, 0.5, 1.5], "texture": "#0"}}}, {"name": "lamp", "from": [3.5, 3, 6.5], "to": [8.5, 5, 8.5], "faces": {"north": {"uv": [0, 0, 3, 5], "texture": "#1"}, "east": {"uv": [0, 0, 3, 5], "texture": "#1"}, "south": {"uv": [0, 0, 3, 5], "texture": "#1"}, "west": {"uv": [0, 0, 3, 5], "texture": "#1"}, "up": {"uv": [0, 0, 3, 5], "texture": "#1"}, "down": {"uv": [0, 0, 3, 5], "texture": "#1"}}}, {"name": "lamp", "from": [-0.5, 2, 5.5], "to": [3.5, 6, 9.5], "faces": {"north": {"uv": [0, 0, 2, 2], "texture": "#1"}, "east": {"uv": [0, 0, 2, 2], "texture": "#1"}, "south": {"uv": [0, 0, 2, 2], "texture": "#1"}, "west": {"uv": [0, 0, 2, 2], "texture": "#1"}, "up": {"uv": [0, 0, 2, 2], "texture": "#1"}, "down": {"uv": [0, 0, 2, 2], "texture": "#1"}}}], "groups": [{"name": "Formsignal_Haupt", "origin": [0, -80, 0], "color": 0, "children": [{"name": "mast5_hp2", "origin": [0, -80, 0], "color": 0, "children": [0, 1, 2, 3, 4]}]}]}
+{
+	"credit": "Made with Blockbench by Mc_Jeronimo",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "opensignals:blocks/default/mast",
+		"1": "opensignals:blocks/default/shield_black",
+		"2": "opensignals:blocks/default/shield_gray",
+		"particle": "opensignals:blocks/semaphore/lamp_off",
+		"lamp": "opensignals:blocks/semaphore/lamp_off"
+	},
+	"elements": [
+		{
+			"name": "wire_wing2",
+			"from": [11, 0, 8.25],
+			"to": [11.5, 11, 8.75],
+			"faces": {
+				"north": {"uv": [0, 0, 0.25, 5.5], "texture": "#2"},
+				"east": {"uv": [0, 0, 0.25, 5.5], "texture": "#2"},
+				"south": {"uv": [0, 0, 0.25, 5.5], "texture": "#2"},
+				"west": {"uv": [0, 0, 0.25, 5.5], "texture": "#2"}
+			}
+		},
+		{
+			"name": "mast",
+			"from": [10.5, 8, 6.5],
+			"to": [12, 9, 9],
+			"faces": {
+				"north": {"uv": [0, 0, 0.75, 0.5], "texture": "#1"},
+				"east": {"uv": [0, 0, 1.25, 0.5], "texture": "#1"},
+				"south": {"uv": [0, 0, 0.75, 0.5], "texture": "#1"},
+				"west": {"uv": [0, 0, 1.25, 0.5], "texture": "#1"},
+				"up": {"uv": [0, 0, 0.75, 1.25], "texture": "#1"},
+				"down": {"uv": [0, 0, 0.75, 1.25], "texture": "#1"}
+			}
+		},
+		{
+			"name": "mast",
+			"from": [10.5, 8, 2.5],
+			"to": [11.5, 9, 5.5],
+			"faces": {
+				"north": {"uv": [0, 0, 0.5, 0.5], "texture": "#0"},
+				"east": {"uv": [0, 0, 1.5, 0.5], "texture": "#0"},
+				"south": {"uv": [0, 0, 0.5, 0.5], "texture": "#0"},
+				"west": {"uv": [0, 0, 1.5, 0.5], "texture": "#0"},
+				"up": {"uv": [0, 0, 0.5, 1.5], "texture": "#0"},
+				"down": {"uv": [0, 0, 0.5, 1.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "lamp",
+			"from": [3.5, 3, 6.5],
+			"to": [8.5, 5, 8.5],
+			"faces": {
+				"north": {"uv": [0, 0, 3, 5], "texture": "#1"},
+				"east": {"uv": [0, 0, 3, 5], "texture": "#1"},
+				"south": {"uv": [0, 0, 3, 5], "texture": "#1"},
+				"west": {"uv": [0, 0, 3, 5], "texture": "#1"},
+				"up": {"uv": [0, 0, 3, 5], "texture": "#1"},
+				"down": {"uv": [0, 0, 3, 5], "texture": "#1"}
+			}
+		},
+		{
+			"name": "lamp",
+			"from": [-0.5, 2, 5.5],
+			"to": [3.5, 6, 9.5],
+			"faces": {
+				"north": {"uv": [0, 0, 4, 4], "texture": "#lamp"},
+				"east": {"uv": [0, 0, 2, 2], "texture": "#1"},
+				"south": {"uv": [0, 0, 2, 2], "texture": "#1"},
+				"west": {"uv": [0, 0, 2, 2], "texture": "#1"},
+				"up": {"uv": [0, 0, 2, 2], "texture": "#1"},
+				"down": {"uv": [0, 0, 2, 2], "texture": "#1"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "Formsignal_Haupt",
+			"origin": [0, -80, 0],
+			"color": 0,
+			"children": [
+				{
+					"name": "mast5_hp2",
+					"origin": [0, -80, 0],
+					"color": 0,
+					"children": [0, 1, 2, 3, 4]
+				}
+			]
+		}
+	]
+}

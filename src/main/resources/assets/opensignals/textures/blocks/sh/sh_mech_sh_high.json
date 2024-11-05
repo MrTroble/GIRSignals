@@ -1,0 +1,27 @@
+{
+	"credit": "Made with Blockbench by Mc_Jeronimo",
+	"texture_size": [32, 32],
+	"textures": {
+		"2": "opensignals:blocks/sh/sh",
+		"particle": "opensignals:blocks/sh/sh"
+	},
+	"elements": [
+		{
+			"name": "sh",
+			"from": [3.5, 3, 4.9],
+			"to": [12.5, 11, 4.9],
+			"rotation": {"angle": 0, "axis": "z", "origin": [8, 7, 5]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#2"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "sh",
+			"origin": [8, 7, 5],
+			"color": 0,
+			"children": [0]
+		}
+	]
+}
