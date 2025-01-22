@@ -36,6 +36,8 @@ public class ModelTranslation {
         if (!translation.equals(VectorWrapper.ZERO)) {
             GlStateManager.translate(translation.getX(), translation.getY(), translation.getZ());
         }
+        GlStateManager.translate(-modelTranslation.getX(), -modelTranslation.getY(),
+                -modelTranslation.getZ());
         GlStateManager.translate(pivotTranslation.getX(), pivotTranslation.getY(),
                 pivotTranslation.getZ());
     }
