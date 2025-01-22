@@ -1,0 +1,292 @@
+{
+    "animations": {
+        "wn/wn_mech_right": {
+            "translationX": 0.5,
+            "translationY": 0,
+            "translationZ": 0.34375,
+            "pivotX": -0.5,
+            "pivotY": 0,
+            "pivotZ": -0.34375,
+            "animationConfigs": [
+                {
+                    "predicate": "(with(WN_MECH.WN1) || hasandisnot(POWERED)) && hasandisnot(SWITCHSIDE) && hasandisnot(FALLBACK_SWITCH)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Y",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "(with(WN_MECH.WN2) || hasandis(POWERED)) && hasandisnot(SWITCHSIDE) && hasandisnot(FALLBACK_SWITCH)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Y",
+                    "rotation": -90
+                }
+            ]
+        },
+        "wn/wn_mech_left": {
+            "translationX": 0.5,
+            "translationY": 0,
+            "translationZ": 0.34375,
+            "pivotX": -0.5,
+            "pivotY": 0,
+            "pivotZ": -0.34375,
+            "animationConfigs": [
+                {
+                    "predicate": "(with(WN_MECH.WN1) || hasandisnot(POWERED)) && hasandis(SWITCHSIDE) && hasandisnot(FALLBACK_SWITCH)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Y",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "(with(WN_MECH.WN2) || hasandis(POWERED)) && hasandis(SWITCHSIDE) && hasandisnot(FALLBACK_SWITCH)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Y",
+                    "rotation": -90
+                }
+            ]
+        },
+        "wn/wn_mech_fallback_right": {
+            "translationX": 0.5,
+            "translationY": 0,
+            "translationZ": 0.34375,
+            "pivotX": -0.5,
+            "pivotY": 0,
+            "pivotZ": -0.34375,
+            "animationConfigs": [
+                {
+                    "predicate": "(with(WN_MECH.WN1) || hasandisnot(POWERED)) && hasandisnot(SWITCHSIDE) && hasandis(FALLBACK_SWITCH)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Y",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "(with(WN_MECH.WN2) || hasandis(POWERED)) && hasandisnot(SWITCHSIDE) && hasandis(FALLBACK_SWITCH)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Y",
+                    "rotation": -90
+                }
+            ]
+        },
+        "wn/wn_mech_fallback_left": {
+            "translationX": 0.5,
+            "translationY": 0,
+            "translationZ": 0.34375,
+            "pivotX": -0.5,
+            "pivotY": 0,
+            "pivotZ": -0.34375,
+            "animationConfigs": [
+                {
+                    "predicate": "(with(WN_MECH.WN1) || hasandisnot(POWERED)) && hasandis(SWITCHSIDE) && hasandis(FALLBACK_SWITCH)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Y",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "(with(WN_MECH.WN2) || hasandis(POWERED)) && hasandis(SWITCHSIDE) && hasandis(FALLBACK_SWITCH)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Y",
+                    "rotation": -90
+                }
+            ]
+        },
+        "wn/wn_mech_handle_bw": {
+            "translationX": 0.5,
+            "translationY": 0.15625,
+            "translationZ": 0,
+            "pivotX": -0.5,
+            "pivotY": -0.15625,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "hasandisnot(POWERED) && with(WEIGHTCOLOR.WHITE_BLACK) && hasandis(MANUAL)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "hasandis(POWERED) && with(WEIGHTCOLOR.WHITE_BLACK) && hasandis(MANUAL)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Z",
+                    "rotation": 90
+                }
+            ]
+        },
+        "wn/wn_mech_handle_bww": {
+            "translationX": 0.5,
+            "translationY": 0.15625,
+            "translationZ": 0,
+            "pivotX": -0.5,
+            "pivotY": -0.15625,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "hasandisnot(POWERED) && with(WEIGHTCOLOR.WHITE_BLACK_W) && hasandis(MANUAL)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "hasandis(POWERED) && with(WEIGHTCOLOR.WHITE_BLACK_W) && hasandis(MANUAL)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Z",
+                    "rotation": 90
+                }
+            ]
+        },
+        "wn/wn_mech_handle_by": {
+            "translationX": 0.5,
+            "translationY": 0.15625,
+            "translationZ": 0,
+            "pivotX": -0.5,
+            "pivotY": -0.15625,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "hasandisnot(POWERED) && with(WEIGHTCOLOR.YELLOW_BLACK) && hasandis(MANUAL)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "hasandis(POWERED) && with(WEIGHTCOLOR.YELLOW_BLACK) && hasandis(MANUAL)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Z",
+                    "rotation": 90
+                }
+            ]
+        },
+        "wn/wn_mech_handle_ry": {
+            "translationX": 0.5,
+            "translationY": 0.15625,
+            "translationZ": 0,
+            "pivotX": -0.5,
+            "pivotY": -0.15625,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "hasandisnot(POWERED) && with(WEIGHTCOLOR.RED_YELLOW) && hasandis(MANUAL)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "hasandis(POWERED) && with(WEIGHTCOLOR.RED_YELLOW) && hasandis(MANUAL)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Z",
+                    "rotation": 90
+                }
+            ]
+        },
+        "wn/wn_mech_handle_y": {
+            "translationX": 0.5,
+            "translationY": 0.15625,
+            "translationZ": 0,
+            "pivotX": -0.5,
+            "pivotY": -0.15625,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "hasandisnot(POWERED) && with(WEIGHTCOLOR.YELLOW) && hasandis(MANUAL)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "hasandis(POWERED) && with(WEIGHTCOLOR.YELLOW) && hasandis(MANUAL)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Z",
+                    "rotation": 90
+                }
+            ]
+        },
+        "wn/wn_mech_handle_inv_bw": {
+            "translationX": 0.5,
+            "translationY": 0.15625,
+            "translationZ": 0,
+            "pivotX": -0.5,
+            "pivotY": -0.15625,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "hasandis(POWERED) && with(WEIGHTCOLOR.BLACK_WHITE) && hasandis(MANUAL)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "hasandisnot(POWERED) && with(WEIGHTCOLOR.BLACK_WHITE) && hasandis(MANUAL)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Z",
+                    "rotation": -90
+                }
+            ]
+        },
+        "wn/wn_mech_handle_inv_bww": {
+            "translationX": 0.5,
+            "translationY": 0.15625,
+            "translationZ": 0,
+            "pivotX": -0.5,
+            "pivotY": -0.15625,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "hasandis(POWERED) && with(WEIGHTCOLOR.BLACK_WHITE_W) && hasandis(MANUAL)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "hasandisnot(POWERED) && with(WEIGHTCOLOR.BLACK_WHITE_W) && hasandis(MANUAL)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Z",
+                    "rotation": -90
+                }
+            ]
+        },
+        "wn/wn_mech_handle_inv_by": {
+            "translationX": 0.5,
+            "translationY": 0.15625,
+            "translationZ": 0,
+            "pivotX": -0.5,
+            "pivotY": -0.15625,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "hasandis(POWERED) && with(WEIGHTCOLOR.BLACK_YELLOW) && hasandis(MANUAL)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "hasandisnot(POWERED) && with(WEIGHTCOLOR.BLACK_YELLOW) && hasandis(MANUAL)",
+                    "mode": "ROTATION",
+                    "animationSpeed": 2,
+                    "rotationAxis": "Z",
+                    "rotation": -90
+                }
+            ]
+        }
+    }
+}
