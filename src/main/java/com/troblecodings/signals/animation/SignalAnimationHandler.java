@@ -30,7 +30,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.color.BlockColors;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
@@ -43,7 +42,6 @@ import net.minecraftforge.client.model.pipeline.LightUtil;
 public class SignalAnimationHandler {
 
     private final SignalTileEntity tile;
-    private final BufferBuilder buffer = new BufferBuilder(500);
 
     public SignalAnimationHandler(final SignalTileEntity tile) {
         this.tile = tile;
@@ -62,27 +60,14 @@ public class SignalAnimationHandler {
             final ModelTranslation translation = entry.getKey();
             if (!translation.shouldRenderModel())
                 return;
-            /*
-             * GlStateManager.enableAlpha(); GlStateManager.pushMatrix();
-             * GlStateManager.translate(vector.getX(), vector.getY(), vector.getZ());
-             * translation.translate(); GlStateManager.rotate(angle.getDregree(), 0, 1, 0);
-             * drawBuffer(first.getValue()); GlStateManager.popMatrix();
-             */
 
-            info.push();
-            info.applyTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-            info.depthOn();
-            info.alphaOn();
-
-            info.translate(info.x, info.y, info.z);
-            info.translate(0.5f, 0.5f, 0.5f);
-            // info.rotate(angle.getDregree(), 0, 1, 0);
-            info.rotate(angle.getQuaternion());
+            GlStateManager.pushMatrix();
+            GlStateManager.translate(info.x, info.y, info.z);
+            GlStateManager.translate(0.5f, 0.5f, 0.5f);
+            GlStateManager.rotate(angle.getQuaternion());
             translation.translate();
             drawBuffer(first.getValue());
-            info.alphaOff();
-            info.depthOff();
-            info.pop();
+            GlStateManager.popMatrix();
 
             if (translation.isAnimationAssigned()) {
                 updateAnimation(translation);
