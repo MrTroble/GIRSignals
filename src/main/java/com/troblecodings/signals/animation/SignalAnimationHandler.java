@@ -17,6 +17,7 @@ import com.troblecodings.signals.OpenSignalsMain;
 import com.troblecodings.signals.SEProperty;
 import com.troblecodings.signals.blocks.Signal;
 import com.troblecodings.signals.contentpacks.SignalAnimationConfigParser;
+import com.troblecodings.signals.core.RenderAnimationInfo;
 import com.troblecodings.signals.core.SignalAngel;
 import com.troblecodings.signals.models.ModelInfoWrapper;
 import com.troblecodings.signals.models.SignalCustomModel;
@@ -29,6 +30,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
@@ -41,6 +43,7 @@ import net.minecraftforge.client.model.pipeline.LightUtil;
 public class SignalAnimationHandler {
 
     private final SignalTileEntity tile;
+    private final BufferBuilder buffer = new BufferBuilder(500);
 
     public SignalAnimationHandler(final SignalTileEntity tile) {
         this.tile = tile;
@@ -49,7 +52,7 @@ public class SignalAnimationHandler {
     private final Map<Entry<IBakedModel, BufferBuilder>, Entry<ModelTranslation, List<SignalAnimation>>>//
     animationPerModel = new HashMap<>();
 
-    public void render(final VectorWrapper vector) {
+    public void render(final RenderAnimationInfo info) {
         final World world = tile.getWorld();
         final BlockPos pos = tile.getPos();
         final IBlockState state = world.getBlockState(pos);
@@ -59,13 +62,27 @@ public class SignalAnimationHandler {
             final ModelTranslation translation = entry.getKey();
             if (!translation.shouldRenderModel())
                 return;
-            GlStateManager.enableAlpha();
-            GlStateManager.pushMatrix();
-            GlStateManager.translate(vector.getX(), vector.getY(), vector.getZ());
+            /*
+             * GlStateManager.enableAlpha(); GlStateManager.pushMatrix();
+             * GlStateManager.translate(vector.getX(), vector.getY(), vector.getZ());
+             * translation.translate(); GlStateManager.rotate(angle.getDregree(), 0, 1, 0);
+             * drawBuffer(first.getValue()); GlStateManager.popMatrix();
+             */
+
+            info.push();
+            info.applyTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+            info.depthOn();
+            info.alphaOn();
+
+            info.translate(info.x, info.y, info.z);
+            info.translate(0.5f, 0.5f, 0.5f);
+            // info.rotate(angle.getDregree(), 0, 1, 0);
+            info.rotate(angle.getQuaternion());
             translation.translate();
-            GlStateManager.rotate(angle.getDregree(), 0, 1, 0);
             drawBuffer(first.getValue());
-            GlStateManager.popMatrix();
+            info.alphaOff();
+            info.depthOff();
+            info.pop();
 
             if (translation.isAnimationAssigned()) {
                 updateAnimation(translation);
@@ -155,8 +172,8 @@ public class SignalAnimationHandler {
         map.forEach((entry, animations) -> {
             final IBakedModel model = SignalCustomModel.getModelFromLocation(
                     new ResourceLocation(OpenSignalsMain.MODID, entry.getKey()));
-            final ModelTranslation translation = new ModelTranslation(VectorWrapper.ZERO,
-                    new Quaternion(0, 0, 0, 0));
+            final ModelTranslation translation =
+                    new ModelTranslation(VectorWrapper.ZERO, new Quaternion(0, 0, 0, 0));
             translation.setModelTranslation(entry.getValue().copy());
             final BufferBuilder buffer = getBufferFromModel(model, entry.getValue().copy());
             animationPerModel.put(Maps.immutableEntry(model, buffer),
@@ -173,14 +190,15 @@ public class SignalAnimationHandler {
         buffer.setTranslation(vec.getX(), vec.getY(), vec.getZ());
         final List<BakedQuad> lst = new ArrayList<>();
         lst.addAll(model.getQuads(ebs, null, 0));
-        for (final EnumFacing face : EnumFacing.VALUES)
+        for (final EnumFacing face : EnumFacing.VALUES) {
             lst.addAll(model.getQuads(ebs, face, 0));
+        }
 
         final BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
         for (final BakedQuad quad : lst) {
             final int k = quad.hasTintIndex()
                     ? (blockColors.colorMultiplier(tile.getBlockType().getDefaultState(), null,
-                            null, quad.getTintIndex()) + 0xFF000000)
+                            null, quad.getTintIndex()) + 0xFFFFFFFF)
                     : 0xFFFFFFFF;
             LightUtil.renderQuadColor(buffer, quad, k);
         }

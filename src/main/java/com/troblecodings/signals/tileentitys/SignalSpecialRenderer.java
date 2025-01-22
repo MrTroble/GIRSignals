@@ -1,6 +1,6 @@
 package com.troblecodings.signals.tileentitys;
 
-import com.troblecodings.core.VectorWrapper;
+import com.troblecodings.signals.core.RenderAnimationInfo;
 import com.troblecodings.signals.core.RenderOverlayInfo;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -14,7 +14,7 @@ public class SignalSpecialRenderer extends TileEntitySpecialRenderer<SignalTileE
             tile.renderOverlay(new RenderOverlayInfo(x, y, z, getFontRenderer()));
         }
         if (tile.getSignal().hasAnimation()) {
-            tile.getAnimationHandler().render(new VectorWrapper((float) x, (float) y, (float) z));
+            tile.getAnimationHandler().render(new RenderAnimationInfo(x, y, z).with(tile));
         }
     }
 

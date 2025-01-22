@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import org.lwjgl.util.vector.Quaternion;
 
+import com.troblecodings.core.QuaternionWrapper;
 import com.troblecodings.core.VectorWrapper;
 
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,7 +12,7 @@ import net.minecraft.client.renderer.GlStateManager;
 public class ModelTranslation {
 
     private VectorWrapper pivotTranslation = VectorWrapper.ZERO;
-    private Quaternion quaternion = null;
+    private Quaternion quaternion = QuaternionWrapper.ONE;
     private SignalAnimation animation;
     private VectorWrapper modelTranslation = VectorWrapper.ZERO;
     private VectorWrapper translation = VectorWrapper.ZERO;
@@ -27,10 +28,9 @@ public class ModelTranslation {
     }
 
     public void translate() {
-        // GlStateManager.translate(modelTranslation.getX() - 0.5f,
-        // modelTranslation.getY() - 0.5f,
-        // modelTranslation.getZ() - 0.5f);
-        if (quaternion != null) {
+        GlStateManager.translate(modelTranslation.getX() - 0.5f, modelTranslation.getY() - 0.5f,
+                modelTranslation.getZ() - 0.5f);
+        if (quaternion != QuaternionWrapper.ONE) {
             GlStateManager.rotate(quaternion);
         }
         if (!translation.equals(VectorWrapper.ZERO)) {
