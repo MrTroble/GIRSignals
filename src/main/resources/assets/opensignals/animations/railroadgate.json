@@ -1,0 +1,180 @@
+{
+    "animations": {
+        "railroad_gate/barrier_base_top": {
+            "translationX": 0.5,
+            "translationY": 1.1875,
+            "translationZ": 0,
+            "pivotX": -0.5,
+            "pivotY": -0.1875,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "with(BARRIER_OPEN.FALSE)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "with(BARRIER_OPEN.TRUE)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 90
+                }
+            ]
+        },
+        "railroad_gate/barrier_1": {
+            "translationX": 0.5,
+            "translationY": 1.1875,
+            "translationZ": 0,
+            "pivotX": 0.5,
+            "pivotY": -0.1875,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "with(BARRIER_OPEN.FALSE)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "with(BARRIER_OPEN.TRUE)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 90
+                }
+            ]
+        },
+        "railroad_gate/barrier_2": {
+            "translationX": 0.5,
+            "translationY": 1.1875,
+            "translationZ": 0,
+            "pivotX": 1.5,
+            "pivotY": -0.1875,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "with(BARRIER_OPEN.FALSE) && (with(BARRIER_LENGTH.L1) || with(BARRIER_LENGTH.L2) || with(BARRIER_LENGTH.L3) || with(BARRIER_LENGTH.L4) || with(BARRIER_LENGTH.L5) || with(BARRIER_LENGTH.L6))",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "with(BARRIER_OPEN.TRUE) && (with(BARRIER_LENGTH.L1) || with(BARRIER_LENGTH.L2) || with(BARRIER_LENGTH.L3) || with(BARRIER_LENGTH.L4) || with(BARRIER_LENGTH.L5) || with(BARRIER_LENGTH.L6))",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 90
+                }
+            ]
+        },
+        "railroad_gate/barrier_3": {
+            "translationX": 0.5,
+            "translationY": 1.1875,
+            "translationZ": 0,
+            "pivotX": 2.5,
+            "pivotY": -0.1875,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "with(BARRIER_OPEN.FALSE) && (with(BARRIER_LENGTH.L2) || with(BARRIER_LENGTH.L3) || with(BARRIER_LENGTH.L4) || with(BARRIER_LENGTH.L5) || with(BARRIER_LENGTH.L6))",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "with(BARRIER_OPEN.TRUE) && (with(BARRIER_LENGTH.L2) || with(BARRIER_LENGTH.L3) || with(BARRIER_LENGTH.L4) || with(BARRIER_LENGTH.L5) || with(BARRIER_LENGTH.L6))",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 90
+                }
+            ]
+        },
+        "railroad_gate/barrier_4": {
+            "translationX": 0.5,
+            "translationY": 1.1875,
+            "translationZ": 0,
+            "pivotX": 3.5,
+            "pivotY": -0.1875,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "with(BARRIER_OPEN.FALSE) && (with(BARRIER_LENGTH.L3) || with(BARRIER_LENGTH.L4) || with(BARRIER_LENGTH.L5) || with(BARRIER_LENGTH.L6))",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "with(BARRIER_OPEN.TRUE) && (with(BARRIER_LENGTH.L3) || with(BARRIER_LENGTH.L4) || with(BARRIER_LENGTH.L5) || with(BARRIER_LENGTH.L6))",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 90
+                }
+            ]
+        },
+        "railroad_gate/barrier_5": {
+            "translationX": 0.5,
+            "translationY": 1.1875,
+            "translationZ": 0,
+            "pivotX": 4.5,
+            "pivotY": -0.1875,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "with(BARRIER_OPEN.FALSE) && (with(BARRIER_LENGTH.L4) || with(BARRIER_LENGTH.L5) || with(BARRIER_LENGTH.L6))",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "with(BARRIER_OPEN.TRUE) && (with(BARRIER_LENGTH.L4) || with(BARRIER_LENGTH.L5) || with(BARRIER_LENGTH.L6))",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 90
+                }
+            ]
+        },
+        "railroad_gate/barrier_6": {
+            "translationX": 0.5,
+            "translationY": 1.1875,
+            "translationZ": 0,
+            "pivotX": 5.5,
+            "pivotY": -0.1875,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "with(BARRIER_OPEN.FALSE) && (with(BARRIER_LENGTH.L5) || with(BARRIER_LENGTH.L6))",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "with(BARRIER_OPEN.TRUE) && (with(BARRIER_LENGTH.L5) || with(BARRIER_LENGTH.L6))",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 90
+                }
+            ]
+        },
+        "railroad_gate/barrier_7": {
+            "translationX": 0.5,
+            "translationY": 1.1875,
+            "translationZ": 0,
+            "pivotX": 6.5,
+            "pivotY": -0.1875,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "with(BARRIER_OPEN.FALSE) && with(BARRIER_LENGTH.L6)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "with(BARRIER_OPEN.TRUE) && with(BARRIER_LENGTH.L6)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 90
+                }
+            ]
+        }
+    }
+}

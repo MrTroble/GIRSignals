@@ -1,0 +1,60 @@
+{
+    "animations": {
+        "sh/sh_mech_sh": {
+            "translationX": 0.5,
+            "translationY": 0.4375,
+            "translationZ": 0,
+            "pivotX": -0.5,
+            "pivotY": -0.4375,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "with(SH_MECH.SH0) && hasandisnot(sh_high)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "with(SH_MECH.SH1) && hasandisnot(sh_high)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": -45
+                },
+                {
+                    "predicate": "with(SH_MECH.SH1_GSP2) && hasandisnot(sh_high)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": -90
+                }
+            ]
+        },
+        "sh/sh_mech_sh_high": {
+            "translationX": 0.5,
+            "translationY": 2.4375,
+            "translationZ": 0,
+            "pivotX": -0.5,
+            "pivotY": -0.4375,
+            "pivotZ": 0,
+            "animationConfigs": [
+                {
+                    "predicate": "with(SH_MECH.SH0) && hasandis(sh_high)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": 0
+                },
+                {
+                    "predicate": "with(SH_MECH.SH1) && hasandis(sh_high)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": -45
+                },
+                {
+                    "predicate": "with(SH_MECH.SH1_GSP2) && hasandis(sh_high)",
+                    "mode": "ROTATION",
+                    "rotationAxis": "Z",
+                    "rotation": -90
+                }
+            ]
+        }
+    }
+}
