@@ -88,7 +88,7 @@ public class SignalTileEntity extends SyncableTileEntity implements NamableWrapp
     @Override
     public AxisAlignedBB getRenderBoundingBox() {
         // I don't know why I need to do this shit for rendering the Entity if I have an
-        // animation and I don#t want it to stop when I am not watching...
+        // animation and I dont want it to stop when I am not watching...
         if (hasAnimation()) {
             return new AxisAlignedBB(Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE,
                     Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
