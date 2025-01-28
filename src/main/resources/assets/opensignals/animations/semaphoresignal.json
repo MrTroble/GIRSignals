@@ -55,13 +55,13 @@
             "pivotZ": 0,
             "animationConfigs": [
                 {
-                    "predicate": "with(WING2.FALSE) && with(SEMATYPE.MAIN)",
+                    "predicate": "with(WING2.FALSE) && with(SEMATYPE.MAIN) && hasandis(HP2)",
                     "mode": "ROTATION",
                     "rotationAxis": "Z",
                     "rotation": 0
                 },
                 {
-                    "predicate": "with(WING2.TRUE) && with(SEMATYPE.MAIN)",
+                    "predicate": "with(WING2.TRUE) && with(SEMATYPE.MAIN) && hasandis(HP2)",
                     "mode": "ROTATION",
                     "rotationAxis": "Z",
                     "rotation": 45
@@ -77,14 +77,14 @@
             "pivotZ": 0,
             "animationConfigs": [
                 {
-                    "predicate": "with(WING2.FALSE) && with(SEMATYPE.MAIN)",
+                    "predicate": "with(WING2.FALSE) && with(SEMATYPE.MAIN) && hasandis(HP2)",
                     "mode": "ROTATION",
                     "rotationAxis": "Z",
                     "animationSpeed": 0.5,
                     "rotation": 0
                 },
                 {
-                    "predicate": "with(WING2.TRUE) && with(SEMATYPE.MAIN)",
+                    "predicate": "with(WING2.TRUE) && with(SEMATYPE.MAIN) && hasandis(HP2)",
                     "mode": "ROTATION",
                     "rotationAxis": "Z",
                     "animationSpeed": 0.5,
@@ -147,13 +147,13 @@
             "pivotZ": 0,
             "animationConfigs": [
                 {
-                    "predicate": "!hasandis(WING2) && with(SEMATYPE.MAIN_SMALL)",
+                    "predicate": "!hasandis(WING2) && with(SEMATYPE.MAIN_SMALL) && hasandis(HP2)",
                     "mode": "ROTATION",
                     "rotationAxis": "Z",
                     "rotation": 0
                 },
                 {
-                    "predicate": "hasandis(WING2) && with(SEMATYPE.MAIN_SMALL)",
+                    "predicate": "hasandis(WING2) && with(SEMATYPE.MAIN_SMALL) && hasandis(HP2)",
                     "mode": "ROTATION",
                     "rotationAxis": "Z",
                     "rotation": 45
@@ -169,14 +169,14 @@
             "pivotZ": 0,
             "animationConfigs": [
                 {
-                    "predicate": "!hasandis(WING2) && with(SEMATYPE.MAIN_SMALL)",
+                    "predicate": "!hasandis(WING2) && with(SEMATYPE.MAIN_SMALL) && hasandis(HP2)",
                     "mode": "ROTATION",
                     "rotationAxis": "Z",
                     "animationSpeed": 0.5,
                     "rotation": 0
                 },
                 {
-                    "predicate": "hasandis(WING2) && with(SEMATYPE.MAIN_SMALL)",
+                    "predicate": "hasandis(WING2) && with(SEMATYPE.MAIN_SMALL) && hasandis(HP2)",
                     "mode": "ROTATION",
                     "rotationAxis": "Z",
                     "animationSpeed": 0.5,
