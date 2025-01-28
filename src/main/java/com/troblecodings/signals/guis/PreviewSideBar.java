@@ -26,6 +26,7 @@ import com.troblecodings.signals.enums.ChangeableStage;
 import com.troblecodings.signals.models.ModelInfoWrapper;
 import com.troblecodings.signals.models.SignalCustomModel;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.util.ResourceLocation;
 
@@ -94,7 +95,8 @@ public class PreviewSideBar {
             for (final SignalAnimation animation : list) {
                 final Predicate<ModelInfoWrapper> predicate = animation.getPredicate();
                 final ModelTranslation modelTranslation = animation.getFinalModelTranslation();
-                modelTranslation.setModelTranslation(entry.getValue().copy());
+                final VectorWrapper modelTrans = entry.getValue().copy();
+                modelTranslation.setModelTranslation(modelTrans);
 
                 final IBakedModel model = SignalCustomModel.getModelFromLocation(
                         new ResourceLocation(OpenSignalsMain.MODID, entry.getKey()));
@@ -104,6 +106,8 @@ public class PreviewSideBar {
                 info.predicate = p -> predicate.test(wrapper);
                 info.consumer = d -> {
                     modelTranslation.translate();
+                    GlStateManager.translate(modelTrans.getX(), modelTrans.getY(),
+                            modelTrans.getZ());
                 };
                 animationInfos.add(info);
             }
